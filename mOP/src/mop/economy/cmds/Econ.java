@@ -1,8 +1,5 @@
 package mop.economy.cmds;
 
-import meconomy.utils.Utils;
-import meconomy.utils.mEcon;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -10,6 +7,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import mop.economy.utils.Utils;
+import mop.economy.utils.mEcon;
 
 public class Econ implements CommandExecutor {
 	

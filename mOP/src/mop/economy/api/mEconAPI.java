@@ -1,9 +1,9 @@
 package mop.economy.api;
 
-import meconomy.utils.mEcon;
-
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+
+import mop.economy.utils.mEcon;
 
 public class mEconAPI {
 	

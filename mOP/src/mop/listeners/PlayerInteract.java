@@ -3,14 +3,6 @@ package mop.listeners;
 import java.util.ArrayList;
 import java.util.Random;
 
-import meconomy.api.mEconAPI;
-import mop.managers.ConfigManager;
-import mop.managers.CrateGUI;
-import mop.managers.KeyType;
-import mop.managers.Manager;
-import mop.managers.Utils;
-import mop.managers.VoucherType;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
@@ -30,6 +22,14 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import mop.economy.api.mEconAPI;
+import mop.managers.ConfigManager;
+import mop.managers.CrateGUI;
+import mop.managers.KeyType;
+import mop.managers.Manager;
+import mop.managers.Utils;
+import mop.managers.VoucherType;
 
 public class PlayerInteract implements Listener {
 	

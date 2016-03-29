@@ -1,14 +1,14 @@
 package mop.cmds;
 
-import meconomy.api.mEconAPI;
-import mop.managers.ChatManager;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import mop.economy.api.mEconAPI;
+import mop.managers.ChatManager;
 
 public class Pay implements CommandExecutor {
 	

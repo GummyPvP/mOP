@@ -2,7 +2,13 @@ package mop.main;
 
 import java.util.logging.Level;
 
-import meconomy.utils.mEcon;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.java.JavaPlugin;
+
 import mop.cmds.Balance;
 import mop.cmds.CombatLog;
 import mop.cmds.Createcrate;
@@ -21,6 +27,7 @@ import mop.cmds.Reset;
 import mop.cmds.Stats;
 import mop.cmds.Vote;
 import mop.economy.cmds.Econ;
+import mop.economy.utils.mEcon;
 import mop.listeners.BlockBreak;
 import mop.listeners.CommandPreprocess;
 import mop.listeners.EntityDamage;
@@ -42,13 +49,6 @@ import mop.mspawn.cmds.SetSpawn;
 import mop.mspawn.cmds.Spawn;
 import mop.mspawn.listeners.PlayerMove;
 import mop.mspawn.listeners.PlayerRespawn;
-
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 

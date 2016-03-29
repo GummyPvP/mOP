@@ -1,15 +1,15 @@
 package mop.listeners;
 
-import meconomy.utils.mEcon;
-import mop.managers.IPFilter;
-import mop.managers.Manager;
-import mop.managers.StatsManager;
-
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+
+import mop.economy.utils.mEcon;
+import mop.managers.IPFilter;
+import mop.managers.Manager;
+import mop.managers.StatsManager;
 
 public class PlayerJoin implements Listener {
 
