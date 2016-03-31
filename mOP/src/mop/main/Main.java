@@ -24,7 +24,6 @@ import mop.cmds.Reload;
 import mop.cmds.RemoveCrate;
 import mop.cmds.Rename;
 import mop.cmds.Reset;
-import mop.cmds.Stats;
 import mop.cmds.Vote;
 import mop.economy.cmds.Econ;
 import mop.economy.utils.mEcon;

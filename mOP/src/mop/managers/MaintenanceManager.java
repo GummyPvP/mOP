@@ -22,8 +22,6 @@ public class MaintenanceManager {
 
 	}
 	
-	boolean enabled = false;
-	
     File whitelist = new File("plugins/mOP/","whitelist.yml");
 	FileConfiguration whitelistfile = YamlConfiguration.loadConfiguration(whitelist);
 	
@@ -40,6 +38,7 @@ public class MaintenanceManager {
 		players.add("mckpvp");
 		
 		getWhitelistFile().addDefault("whitelist", players);
+		getWhitelistFile().addDefault("status", false);
 		
 		getWhitelistFile().options().copyDefaults(true);
 		
@@ -91,14 +90,16 @@ public class MaintenanceManager {
 	}
 	
 	public boolean isEnabled() {
-		return enabled;
+		return getWhitelistFile().getBoolean("status");
 	}
 	public void toggleMaintenace(boolean b) {
 		if (b  == true) {
-			enabled = true;
+			getWhitelistFile().set("status", true);
+			saveWhitelistFile();
 		} 
 		if (b == false) {
-			enabled = false;
+			getWhitelistFile().set("status", false);
+			saveWhitelistFile();
 	
 		}
 	}
