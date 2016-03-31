@@ -73,6 +73,10 @@ commands:
       description:
       usage: /<command>
       aliases: pv
+    viewvault:
+      description:
+      usage: /<command>
+      aliases: vpv
         
 permissions:
     mstats.reload:

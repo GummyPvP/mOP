@@ -50,6 +50,7 @@ import mop.mspawn.listeners.PlayerMove;
 import mop.mspawn.listeners.PlayerRespawn;
 import mop.mvault.managers.VaultManager;
 import mop.mvaults.cmds.Vault;
+import mop.mvaults.cmds.ViewVault;
 import mop.mvaults.listeners.InventoryClose;
 
 public class Main extends JavaPlugin {
@@ -108,6 +109,7 @@ public class Main extends JavaPlugin {
 		getCommand("Spawn").setExecutor(new Spawn());
 		getCommand("SetSpawn").setExecutor(new SetSpawn());
 		getCommand("vault").setExecutor(new Vault());
+		getCommand("viewvault").setExecutor(new ViewVault());
 	}
 	public void loadEconomy() {
 		

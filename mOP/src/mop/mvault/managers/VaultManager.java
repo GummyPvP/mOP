@@ -45,6 +45,33 @@ public class VaultManager {
 		}
 		
 	}
+	public void saveInventory(ItemStack[] inv, int inventory, String p) {
+		
+		File cfile = new File("plugins/mOP/mVaults/" + p + ".yml");
+		FileConfiguration config = YamlConfiguration.loadConfiguration(cfile);
+		
+		ArrayList<ItemStack> itemList = new ArrayList<ItemStack>();
+		
+		for (ItemStack i : inv) {
+			
+			if (i == null) {
+				i = new ItemStack(Material.AIR);
+			}
+			
+			itemList.add(i);
+			
+		}
+		
+		config.set("inv." + inventory, itemList);
+			
+			try {
+				config.save(cfile);
+			} catch (Exception e) {
+				e.printStackTrace();
+		}
+		
+		
+	}
 	public void saveInventory(ItemStack[] inv, int inventory, Player p) {
 		
 		File cfile = new File("plugins/mOP/mVaults/" + p.getName() + ".yml");
@@ -96,6 +123,38 @@ public class VaultManager {
 		
 		Inventory inv;
 		inv = Bukkit.getServer().createInventory(null, 27, ChatColor.GREEN + "Vault: " + p.getName() + " #" + inventory);
+		
+        ItemStack[] content = ((List<ItemStack>) config.get("inv." + inventory)).toArray(new ItemStack[0]);
+        
+        inv.setContents(content);
+		
+		
+		return inv;
+	}
+	@SuppressWarnings("unchecked")
+	public Inventory getInventory(int inventory, String p) {
+		
+		
+		File cfile = new File("plugins/mOP/mVaults/" + p + ".yml");
+		FileConfiguration config = YamlConfiguration.loadConfiguration(cfile);
+		
+		if (config.contains("inv." + inventory) == false) {
+			
+			ArrayList<ItemStack> itemList = new ArrayList<ItemStack>();
+			
+			config.set("inv." + inventory, itemList);
+			
+			try {
+				config.save(cfile);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		
+		Inventory inv;
+		inv = Bukkit.getServer().createInventory(null, 27, ChatColor.GREEN + "Vault: " + p + " #" + inventory);
 		
         ItemStack[] content = ((List<ItemStack>) config.get("inv." + inventory)).toArray(new ItemStack[0]);
         
