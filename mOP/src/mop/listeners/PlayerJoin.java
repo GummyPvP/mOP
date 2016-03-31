@@ -10,6 +10,7 @@ import mop.economy.utils.mEcon;
 import mop.managers.IPFilter;
 import mop.managers.Manager;
 import mop.managers.StatsManager;
+import mop.mvault.managers.VaultManager;
 
 public class PlayerJoin implements Listener {
 
@@ -19,6 +20,8 @@ public class PlayerJoin implements Listener {
 		
 		mEcon econ = new mEcon(p);
 		econ.setupPlayer();
+		
+		VaultManager.getInstance().setupPlayer(p);
 		
 		for (int i = 0; i < 150; i++) {
 			p.sendMessage("        ");

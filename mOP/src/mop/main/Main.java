@@ -49,6 +49,9 @@ import mop.mspawn.cmds.SetSpawn;
 import mop.mspawn.cmds.Spawn;
 import mop.mspawn.listeners.PlayerMove;
 import mop.mspawn.listeners.PlayerRespawn;
+import mop.mvault.managers.VaultManager;
+import mop.mvaults.cmds.Vault;
+import mop.mvaults.listeners.InventoryClose;
 
 public class Main extends JavaPlugin {
 
@@ -63,6 +66,8 @@ public class Main extends JavaPlugin {
 		MaintenanceManager.getInstance().setup();
 		
 		IPFilter.getInstance().setupConfig();
+		
+		VaultManager.getInstance().setup(this);
 		
 		loadEconomy();
 		
@@ -81,8 +86,9 @@ public class Main extends JavaPlugin {
 		Bukkit.getServer().getPluginManager().registerEvents(new ServerListPing(), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new PlayerLogin(), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new InventoryClick(), this);
+		Bukkit.getServer().getPluginManager().registerEvents(new InventoryClose(), this);
 		
-		getCommand("Stats").setExecutor(new Stats());
+		//getCommand("Stats").setExecutor(new Stats());
 		getCommand("Reload").setExecutor(new Reload());
 		getCommand("Reset").setExecutor(new Reset());
 		getCommand("CombatLog").setExecutor(new CombatLog());
@@ -102,6 +108,7 @@ public class Main extends JavaPlugin {
 		getCommand("mecon").setExecutor(new Econ());
 		getCommand("Spawn").setExecutor(new Spawn());
 		getCommand("SetSpawn").setExecutor(new SetSpawn());
+		getCommand("vault").setExecutor(new Vault());
 	}
 	public void loadEconomy() {
 		

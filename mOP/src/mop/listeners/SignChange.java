@@ -1,12 +1,12 @@
 package mop.listeners;
 
-import mpermissions.utils.ChatManager;
-import net.md_5.bungee.api.ChatColor;
-
 import org.bukkit.block.Sign;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
+
+import mop.managers.ChatManager;
+import net.md_5.bungee.api.ChatColor;
 
 public class SignChange implements Listener {
 	

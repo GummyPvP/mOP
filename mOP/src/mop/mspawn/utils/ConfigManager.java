@@ -19,20 +19,14 @@ public class ConfigManager {
 		return instance;
 	}
 	
-	File file;
-	FileConfiguration config;
 	Plugin p;
+	
+    File file = new File("plugins/mSpawn/","config.yml");
+	FileConfiguration config = YamlConfiguration.loadConfiguration(file);
 	
 	public void setup(Plugin p) {
 		
 		this.p = p;
-		
-		file = new File(p.getDataFolder(), "spawn.yml");
-		config = YamlConfiguration.loadConfiguration(file);
-		
-		if (!p.getDataFolder().exists()) {
-			p.getDataFolder().mkdir();
-		}
 		
 		if (!file.exists()) {
 			
@@ -40,9 +34,9 @@ public class ConfigManager {
 				
 				file.createNewFile();
 				
-				config.set("settings.teleportDeniedMessage", "&8Â» &cYou moved! Teleportation denied.");
-				config.set("settings.teleportDelayMessage", "&8Â» &cTeleporting, please do not move for &a<time> &cseconds");
-				config.set("settings.setSpawnMessage", "&8Â» &7Spawn successfully set");
+				config.set("settings.teleportDeniedMessage", "&8» &cYou moved! Teleportation denied.");
+				config.set("settings.teleportDelayMessage", "&8» &cTeleporting, please do not move for &a<time> &cseconds");
+				config.set("settings.setSpawnMessage", "&8» &7Spawn successfully set");
 				config.set("settings.time", 3);
 				
 				config.set("spawn.world", "world");

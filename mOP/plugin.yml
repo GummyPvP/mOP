@@ -69,6 +69,10 @@ commands:
       description:
       usage: /<command>
       aliases: mm
+    vault:
+      description:
+      usage: /<command>
+      aliases: pv
         
 permissions:
     mstats.reload:

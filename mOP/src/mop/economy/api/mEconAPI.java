@@ -6,11 +6,6 @@ import org.bukkit.entity.Player;
 import mop.economy.utils.mEcon;
 
 public class mEconAPI {
-	
-	
-	private mEconAPI() {
-		
-	}
 
 	public static int getMoney(Player p) {
 		mEcon econ = new mEcon(p);
