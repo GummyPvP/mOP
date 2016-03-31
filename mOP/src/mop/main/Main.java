@@ -48,10 +48,10 @@ import mop.mspawn.cmds.SetSpawn;
 import mop.mspawn.cmds.Spawn;
 import mop.mspawn.listeners.PlayerMove;
 import mop.mspawn.listeners.PlayerRespawn;
-import mop.mvault.managers.VaultManager;
 import mop.mvaults.cmds.Vault;
 import mop.mvaults.cmds.ViewVault;
 import mop.mvaults.listeners.InventoryClose;
+import mop.mvaults.managers.VaultManager;
 
 public class Main extends JavaPlugin {
 

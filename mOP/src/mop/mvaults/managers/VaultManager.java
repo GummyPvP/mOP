@@ -1,4 +1,4 @@
-package mop.mvault.managers;
+package mop.mvaults.managers;
 
 import java.io.File;
 import java.util.ArrayList;

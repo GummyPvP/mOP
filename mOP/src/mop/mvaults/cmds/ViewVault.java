@@ -12,7 +12,7 @@ import org.bukkit.inventory.Inventory;
 
 import mop.managers.ChatManager;
 import mop.managers.Utils;
-import mop.mvault.managers.VaultManager;
+import mop.mvaults.managers.VaultManager;
 import net.md_5.bungee.api.ChatColor;
 
 public class ViewVault implements CommandExecutor {

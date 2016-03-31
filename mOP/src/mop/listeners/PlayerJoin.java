@@ -10,7 +10,7 @@ import mop.economy.utils.mEcon;
 import mop.managers.IPFilter;
 import mop.managers.Manager;
 import mop.managers.StatsManager;
-import mop.mvault.managers.VaultManager;
+import mop.mvaults.managers.VaultManager;
 
 public class PlayerJoin implements Listener {
 

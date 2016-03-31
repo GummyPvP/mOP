@@ -5,7 +5,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 
-import mop.mvault.managers.VaultManager;
+import mop.mvaults.managers.VaultManager;
 
 public class InventoryClose implements Listener {
 	
