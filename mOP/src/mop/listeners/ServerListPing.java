@@ -17,14 +17,14 @@ public class ServerListPing implements Listener {
 			e.setMotd(ChatColor.translateAlternateColorCodes('&', 
 					"       &b&m-&8»&e&m-&8»&b&m-&8»&e&m-&8» &8[&b✧&8] &b&lGummy PvP &8[&b✧&8] &8«&b&m-&8«&e&m-&8«&b&m-&8«&e&m-&r" + 
 					      " \n " + 
-							"         &a&l(!) &cCurrently down for maintenance &a&l(!)"));
+							"             &a&l(!) &cCurrently down for maintenance &a&l(!)"));
 			
 		} else {
 		
 		e.setMotd(ChatColor.translateAlternateColorCodes('&', 
 				"       &b&m-&8»&e&m-&8»&b&m-&8»&e&m-&8» &8[&b✧&8] &b&lGummy PvP &8[&b✧&8] &8«&b&m-&8«&e&m-&8«&b&m-&8«&e&m-&r" + 
 				      " \n " + 
-						"         &a&l(!) &b&lOP Factions! &b&lOpening Soon! &a&l(!)"));
+						"         &a&l(!) &b&lNow Open! Join Today! &a&l(!)"));
 		}
 	}
 }

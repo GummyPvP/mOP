@@ -315,8 +315,8 @@ public class PlayerInteract implements Listener {
 				cat.setBaby();
 				cat.setAgeLock(true);
 				cat.setCatType(Type.BLACK_CAT);
-				cat.setMaxHealth(3000.0);
-				cat.setHealth(3000.0);
+				cat.setMaxHealth(2000.0);
+				cat.setHealth(2000.0);
 
 				p.updateInventory();
 			} else {
@@ -377,8 +377,8 @@ public class PlayerInteract implements Listener {
 				wolf.setAdult();
 				wolf.setAgeLock(true);
 				wolf.setAngry(false);
-				wolf.setMaxHealth(3000.0);
-				wolf.setHealth(3000.0);
+				wolf.setMaxHealth(2000.0);
+				wolf.setHealth(2000.0);
 			} else if (r.nextInt(5) == 3) {
 				mEconAPI.addMoney(p, 120000);
 				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes(
