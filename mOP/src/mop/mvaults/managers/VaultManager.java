@@ -122,7 +122,7 @@ public class VaultManager {
 		
 		
 		Inventory inv;
-		inv = Bukkit.getServer().createInventory(null, 27, ChatColor.GREEN + "Vault: " + p.getName() + " #" + inventory);
+		inv = Bukkit.getServer().createInventory(null, 27, ChatColor.RED + "Vault: " + p.getName() + " #" + inventory);
 		
         ItemStack[] content = ((List<ItemStack>) config.get("inv." + inventory)).toArray(new ItemStack[0]);
         
@@ -131,6 +131,7 @@ public class VaultManager {
 		
 		return inv;
 	}
+	
 	@SuppressWarnings("unchecked")
 	public Inventory getInventory(int inventory, String p) {
 		
@@ -154,7 +155,7 @@ public class VaultManager {
 		
 		
 		Inventory inv;
-		inv = Bukkit.getServer().createInventory(null, 27, ChatColor.GREEN + "Vault: " + p + " #" + inventory);
+		inv = Bukkit.getServer().createInventory(null, 27, ChatColor.RED + "Vault: " + p + " #" + inventory);
 		
         ItemStack[] content = ((List<ItemStack>) config.get("inv." + inventory)).toArray(new ItemStack[0]);
         

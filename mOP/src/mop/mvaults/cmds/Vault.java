@@ -24,6 +24,7 @@ public class Vault implements CommandExecutor {
 			return true;
 			
 		}
+		
 		Player p = (Player) sender;
 		
 		if (cmd.getName().equalsIgnoreCase("vault")) {
@@ -36,12 +37,14 @@ public class Vault implements CommandExecutor {
 				
 			}
 		}
+		
 		if (args.length == 0) {
 			
 			sender.sendMessage(ChatColor.RED + "Please use /pv <number>");
 			
 			return true;
 		}
+		
 		if (Utils.isInt(args[0]) == false) {
 			
 			sender.sendMessage(ChatColor.RED + "You must specify a number!");
@@ -49,6 +52,7 @@ public class Vault implements CommandExecutor {
 		  return true;
 		
 		}
+		
 		if (p.hasPermission("vault." + args[0]) == false) {
 			
 			sender.sendMessage(ChatColor.RED + "You do not have permission for vault " + args[0]);
