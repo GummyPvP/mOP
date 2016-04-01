@@ -121,7 +121,7 @@ public class Main extends JavaPlugin {
 		}
 	public void loadSpawn() {
 		
-		ConfigManager.getInstance().setup(this);
+		mop.mspawn.utils.ConfigManager.getInstance().setup(this);
 		
 		loadListeners(new PlayerMove(), new PlayerRespawn());
 		

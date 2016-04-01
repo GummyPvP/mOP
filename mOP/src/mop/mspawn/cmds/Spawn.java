@@ -2,6 +2,7 @@ package mop.mspawn.cmds;
 
 import java.util.ArrayList;
 
+import mop.main.Main;
 import mop.mspawn.utils.ConfigManager;
 import mop.mspawn.utils.Manager;
 import mop.mspawn.utils.SpawnManager;
@@ -39,7 +40,7 @@ public class Spawn implements CommandExecutor {
 			
 			p.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getInstance().getConfig().getString("settings.teleportDelayMessage").replaceAll("<time>", ConfigManager.getInstance().getConfig().getString("settings.time"))));
 			
-			Bukkit.getScheduler().scheduleSyncDelayedTask(ConfigManager.getInstance().getPlugin(), new Runnable() {
+			Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), new Runnable() {
 
 				@Override
 				public void run() {
