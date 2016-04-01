@@ -36,7 +36,6 @@ import mop.listeners.PlayerDeath;
 import mop.listeners.PlayerInteract;
 import mop.listeners.PlayerJoin;
 import mop.listeners.PlayerLogin;
-import mop.listeners.PlayerQuit;
 import mop.listeners.ServerListPing;
 import mop.listeners.SignChange;
 import mop.listeners.VoteListener;
@@ -76,7 +75,6 @@ public class Main extends JavaPlugin {
 		Bukkit.getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new PlayerDeath(), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new EntityDamageByEntity(), this);
-		Bukkit.getServer().getPluginManager().registerEvents(new PlayerQuit(), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new CommandPreprocess(), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new VoteListener(), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new PlayerInteract(), this);

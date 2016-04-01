@@ -15,15 +15,18 @@ public class SignChange implements Listener {
 		if (e.isCancelled()) {
 			return;
 		}
+		
 		String[] lines = e.getLines();
 		
 		if (!(e.getBlock().getState() instanceof Sign)) {
 			return;
 		}
+		
 		if (!e.getPlayer().hasPermission("mop.sign.color")) {
 			ChatManager.getInstance().messageNoPermission(e.getPlayer());
 			return;
 		}
+		
 		e.setLine(0, ChatColor.translateAlternateColorCodes('&', lines[0]));
 		e.setLine(1, ChatColor.translateAlternateColorCodes('&', lines[1]));
 		e.setLine(2, ChatColor.translateAlternateColorCodes('&', lines[2]));

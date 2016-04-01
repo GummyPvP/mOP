@@ -11,22 +11,19 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class Createcrate implements CommandExecutor {
-	
-	
-	
+
 	@Override
-	public boolean onCommand(CommandSender sender, Command cmd, String arg2,
-			String[] args) {
+	public boolean onCommand(CommandSender sender, Command cmd, String arg2, String[] args) {
 		if (!(sender instanceof Player)) {
 			ChatManager.getInstance().messageSenderPlayerOnly(sender);
 			return true;
 		}
 		Player p = (Player) sender;
-		
+
 		if (sender.hasPermission("mop.createcrate") == false) {
-			
+
 			ChatManager.getInstance().messageNoPermission(sender);
-			
+
 			return true;
 		}
 		String location = p.getLocation().getWorld().getName() + ":" + p.getLocation().getBlockX() + ":" + p.getLocation().getBlockY() + ":" + p.getLocation().getBlockZ();
@@ -34,6 +31,6 @@ public class Createcrate implements CommandExecutor {
 		p.getLocation().getBlock().setType(Material.CHEST);
 		p.sendMessage(ChatColor.GREEN + "Crate has been created!");
 		return true;
- 	}
+	}
 
 }

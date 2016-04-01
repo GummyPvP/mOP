@@ -27,5 +27,4 @@ public class ServerListPing implements Listener {
 						"         &a&l(!) &b&lOP Factions! &b&lOpening Soon! &a&l(!)"));
 		}
 	}
-
 }

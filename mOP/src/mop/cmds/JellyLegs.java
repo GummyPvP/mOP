@@ -10,10 +10,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class JellyLegs implements CommandExecutor {
-	
+
 	@Override
-	public boolean onCommand(CommandSender sender, Command cmd, String arg2,
-			String[] args) {
+	public boolean onCommand(CommandSender sender, Command cmd, String arg2, String[] args) {
 		if (!(sender instanceof Player)) {
 			return true;
 		}
@@ -25,20 +24,16 @@ public class JellyLegs implements CommandExecutor {
 			}
 			if (JellyLegsManager.getInstance().isJellyLegsEnabled(p)) {
 				JellyLegsManager.getInstance().setJellyLegs(p, false);
-				p.sendMessage(ChatColor
-						.translateAlternateColorCodes('&',
-								"&8&l» &aJelly legs " + ChatColor.RED + "disabled!"));
+				p.sendMessage(ChatColor.translateAlternateColorCodes('&',
+						"&8&l» &aJelly legs " + ChatColor.RED + "disabled!"));
 				return true;
 			} else {
 				JellyLegsManager.getInstance().setJellyLegs(p, true);
-				p.sendMessage(ChatColor
-						.translateAlternateColorCodes('&',
-								"&8&l» &aJelly legs " + ChatColor.AQUA + "enabled!"));
+				p.sendMessage(ChatColor.translateAlternateColorCodes('&',
+						"&8&l» &aJelly legs " + ChatColor.AQUA + "enabled!"));
 				return true;
 			}
-			
 		}
-		return false;
+		return true;
 	}
-
 }

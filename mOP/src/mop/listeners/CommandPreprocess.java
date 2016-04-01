@@ -12,6 +12,7 @@ public class CommandPreprocess implements Listener {
 	public void onCommandProcess(PlayerCommandPreprocessEvent e) {
 		Player p = e.getPlayer();
 		if (e.getMessage().toLowerCase().equalsIgnoreCase("/help")) {
+			
 			e.setCancelled(true);
 			p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&m----------------------------------------------------"));
 			p.sendMessage(ChatColor.translateAlternateColorCodes('&', "                        &b&lHelp"));
@@ -27,6 +28,7 @@ public class CommandPreprocess implements Listener {
 			p.sendMessage(ChatColor.translateAlternateColorCodes('&', "          &a/home - Telelport to your home"));
 			p.sendMessage(ChatColor.translateAlternateColorCodes('&', "          &a/help - view this page"));
 			p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&m----------------------------------------------------"));
+			
 			return;
 		}
 	}

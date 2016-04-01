@@ -1,5 +1,6 @@
 package mop.listeners;
 
+import mop.managers.CombatManager;
 import mop.managers.StatsManager;
 
 import org.bukkit.Bukkit;
@@ -14,15 +15,16 @@ public class PlayerDeath implements Listener {
 
 	int oldKS;
 
-
 	@EventHandler
 	public void onDeath(PlayerDeathEvent e) {
 		Entity ent = e.getEntity();
 		e.setDeathMessage(null);
 		if (ent instanceof Player) {
+			
 			Player p = (Player) ent;
-			this.oldKS = Integer.valueOf(StatsManager.getInstance().getConfig()
-					.getInt("users." + p.getName() + ".killstreak"));
+			
+			this.oldKS = Integer.valueOf(StatsManager.getInstance().getConfig().getInt("users." + p.getName() + ".killstreak"));
+			
 			if (p.getKiller() instanceof Player) {
 				StatsManager
 						.getInstance()
@@ -44,6 +46,7 @@ public class PlayerDeath implements Listener {
 										.getInt("users."
 												+ p.getKiller().getName()
 												+ ".killstreak") + 1));
+				
 				StatsManager.getInstance().saveConfig();
 				StatsManager.getInstance().reloadConfig();
 
@@ -88,22 +91,6 @@ public class PlayerDeath implements Listener {
 											+ p.getKiller().getName() + "&b&l!"));
 				}
 
-		//		if (econ.getBalance(p.getName()) >= 2000.0) {
-			//		p.getKiller()
-				//			.sendMessage(
-					//				ChatColor.GREEN
-						//					+ "You found their wallet, and successfully took $2000 dollars!");
-//					econ.depositPlayer(p.getKiller().getName(), 2000.0);
-	//				p.sendMessage(ChatColor.RED
-		//					+ "As a ghost, you see the theif stealing your wallet. You lost $2000 dollars!");
-			//		econ.withdrawPlayer(p.getName(), 2000.0);
-				//} else
-					//p.getKiller()
-						//	.sendMessage(
-							//		ChatColor.RED
-								//			+ "The man you just killed was poor. He had no money :(");
-     //
-	//			e.setDroppedExp(250);
 				if (p.getKiller().getItemInHand().hasItemMeta()
 						&& p.getKiller().getItemInHand().getItemMeta()
 								.hasDisplayName()) {
@@ -126,11 +113,12 @@ public class PlayerDeath implements Listener {
 											.toString().toLowerCase()
 											.replaceAll("_", " ")));
 				}
+				
 				killerKS = 0;
 				oldKS = 0;
 
-//				if (CombatManager.getInstance().containsPlayer(p))
-//					CombatManager.getInstance().removePlayer(p);
+				if (CombatManager.getInstance().isInCombat(p)) 
+					CombatManager.getInstance().forceCombatRemove(p);
 			} else
 				return;
 		} else

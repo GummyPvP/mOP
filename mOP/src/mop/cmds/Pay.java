@@ -11,21 +11,19 @@ import mop.economy.api.mEconAPI;
 import mop.managers.ChatManager;
 
 public class Pay implements CommandExecutor {
-	
-	  private boolean isInt(String s, Player p)
-	  {
-	    try {
-	      Integer.parseInt(s);
-	      return true; 
-	      } catch (NumberFormatException e) {
-		     p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &cPlease specify a amount to pay!"));
-	    }
-	    return false;
-	  }
-	
+
+	private boolean isInt(String s, Player p) {
+		try {
+			Integer.parseInt(s);
+			return true;
+		} catch (NumberFormatException e) {
+			p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &cPlease specify a amount to pay!"));
+		}
+		return true;
+	}
+
 	@Override
-	public boolean onCommand(CommandSender sender, Command cmd, String arg2,
-			String[] args) {
+	public boolean onCommand(CommandSender sender, Command cmd, String arg2, String[] args) {
 		if (!(sender instanceof Player)) {
 			return true;
 		}
@@ -40,34 +38,36 @@ public class Pay implements CommandExecutor {
 				return true;
 			}
 			if (args.length == 2) {
-			Player target = Bukkit.getServer().getPlayer(args[0]);
-			if (target == null) {
-				sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &cPlayer " + args[0] + " &cis offline!"));
-				return true;
-			}
-			if (target.getName().equals(p.getName())) {
-				sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &cYou cannot pay yourself!"));
-				return true;
-			}
-		if (isInt(args[1], p)) {
-			if (args[1].equalsIgnoreCase("0")) {
-				sender.sendMessage(ChatColor.RED + "You cannot send $0!");
-				return true;
-			}
-			if (mEconAPI.removeMoney(p, Integer.parseInt(args[1]))) {
-		mEconAPI.addMoney(target, Integer.parseInt(args[1]));
-		target.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &a Received $" + args[1] + " from " + p.getName()));
-		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &a Giving $" + args[1] + " to " + target.getName()));
-		return true;
-		} else
-			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &cYou do not have enough money!"));
-		return true;
-			} 
-	} else
-		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &a/pay <player> <amount>"));
-		return true;
+				Player target = Bukkit.getServer().getPlayer(args[0]);
+				if (target == null) {
+					sender.sendMessage(ChatColor.translateAlternateColorCodes('&',
+							"&8&l» &cPlayer " + args[0] + " &cis offline!"));
+					return true;
+				}
+				if (target.getName().equals(p.getName())) {
+					sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &cYou cannot pay yourself!"));
+					return true;
+				}
+				if (isInt(args[1], p)) {
+					if (args[1].equalsIgnoreCase("0")) {
+						sender.sendMessage(ChatColor.RED + "You cannot send $0!");
+						return true;
+					}
+					if (mEconAPI.removeMoney(p, Integer.parseInt(args[1]))) {
+						mEconAPI.addMoney(target, Integer.parseInt(args[1]));
+						target.sendMessage(ChatColor.translateAlternateColorCodes('&',
+								"&8&l» &a Received $" + args[1] + " from " + p.getName()));
+						sender.sendMessage(ChatColor.translateAlternateColorCodes('&',
+								"&8&l» &a Giving $" + args[1] + " to " + target.getName()));
+						return true;
+					} else
+						sender.sendMessage(
+								ChatColor.translateAlternateColorCodes('&', "&8&l» &cYou do not have enough money!"));
+					return true;
+				}
+			} else sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &a/pay <player> <amount>"));
 		}
-		return false;
+		return true;
 	}
 
 }

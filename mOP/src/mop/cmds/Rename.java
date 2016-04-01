@@ -10,34 +10,36 @@ import mop.managers.ChatManager;
 import mop.managers.Manager;
 
 public class Rename implements CommandExecutor {
-	
-	
-    @SuppressWarnings("static-access")
+
+	@SuppressWarnings("static-access")
 	@Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (!(sender instanceof Player)) {
 			return true;
 		}
 		Player p = (Player) sender;
 		if (cmd.getName().equalsIgnoreCase("rename")) {
+			
 			if (!sender.hasPermission("mop.rename")) {
 				ChatManager.getInstance().messageNoPermission(sender);
 				return true;
 			}
+			
 			if (p.getItemInHand() == null) {
 				sender.sendMessage(ChatColor.RED + "You must be holding a item!");
 				return true;
 			}
+			
 			if (args.length == 0) {
 				sender.sendMessage(ChatColor.RED + "Invalid ussage! Please use /rename <Name>");
 				return true;
 			}
+			
 			if (args.length == 1) {
-			Manager.getInstance().setName(p,(Manager.getInstance().Args(0,args)));
-			return true;
+				Manager.getInstance().setName(p, (Manager.getInstance().Args(0, args)));
+				return true;
 			}
-			}
-		return false;
+		}
+		return true;
 	}
-
 }

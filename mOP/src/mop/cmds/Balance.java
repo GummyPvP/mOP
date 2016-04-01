@@ -20,14 +20,15 @@ public class Balance implements CommandExecutor {
 		}
 		Player p = (Player) sender;
 		if (cmd.getName().equalsIgnoreCase("balance")) {
+			
 			if (!sender.hasPermission("mop.balance")) {
 				ChatManager.getInstance().messageNoPermission(sender);
 				return true;
 			}
+			
 			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &aBalance: &b$" + ChatColor.AQUA + mEconAPI.getMoney(p)));
 			return true;
 		}
-		return false;
+		return true;
 	}
-
 }

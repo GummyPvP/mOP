@@ -35,9 +35,11 @@ public class MaintenanceMode implements CommandExecutor {
 		if (args.length == 1) {
 			if (args[0].equalsIgnoreCase("list")) {
 				StringBuilder sb = new StringBuilder();
+				
 				for (String players : mm.getWhitelistedPlayers()) {
 					sb.append(players + ", ");
 				}
+				
 				sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &aThe Current Whitelisted Players are: &b" + sb.toString()));
 				return true;
 			}

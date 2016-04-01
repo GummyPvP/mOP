@@ -65,8 +65,7 @@ public class GiveVoucher implements CommandExecutor {
 					return true;
 				}
 			} 
-			
 		}
-		return false;
+		return true;
 	}
 }

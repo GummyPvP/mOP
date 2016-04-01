@@ -23,25 +23,24 @@ public class CombatLog implements CommandExecutor {
 		if (cmd.getName().equalsIgnoreCase("CombatLog")) {
 
 			if (CombatManager.getInstance().isInCombat(p)) {
-				
+
 				if (CombatManager.getInstance().getCurrentDelay(p) <= 0) {
-					
+
 					CombatManager.getInstance().forceCombatRemove(p);
-					p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &aYou are not in combat. You may log out."));
-					
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&',
+							"&8&l» &aYou are not in combat. You may log out."));
+
 					return true;
 				}
 
-				p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &cYou are in combat for &e" + CombatManager.getInstance().getCurrentDelay(p) + " &csecond(s)!"));
-				
+				p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &cYou are in combat for &e"
+						+ CombatManager.getInstance().getCurrentDelay(p) + " &csecond(s)!"));
+
 				return true;
 
-			} else {
-				
-				p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &aYou are not in combat. You may log out."));
-				
-				return true;
-			}
+			} else
+				p.sendMessage(
+						ChatColor.translateAlternateColorCodes('&', "&8&l» &aYou are not in combat. You may log out."));
 		}
 		return true;
 	}

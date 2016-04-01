@@ -17,8 +17,6 @@ public class Vote implements CommandExecutor {
 			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &cComing Soon!"));
 			sender.sendMessage(" ");
 		}
-		
 		return true;
 	}
-
 }

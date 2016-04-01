@@ -422,8 +422,7 @@ public class PlayerInteract implements Listener {
 			}
 			p.updateInventory();
 			// Rare Key
-		} else
-		if (p.getItemInHand().getItemMeta().getDisplayName()
+		} else if (p.getItemInHand().getItemMeta().getDisplayName()
 				.equalsIgnoreCase(ChatColor.RED + "Rare Crate Key")) {
 			e.setCancelled(true);
 			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
@@ -652,8 +651,6 @@ public class PlayerInteract implements Listener {
 								
 							}
 							
-
-							
 						} catch (Exception e2) {
 							p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8» &cThis shop sign is not configured correctly! Please contact an administrator."));
 						}
@@ -704,13 +701,13 @@ public class PlayerInteract implements Listener {
 				} else p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8» &cYou do not have the required amount of funds to purchase this item!"));
 					
 			} else p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8» &cThis shop sign is not configured correctly! Please contact an administrator."));
-			}
-			break;
 		}
-		
-	}
+		break;
+	}		
+}
 	@EventHandler
 	public void onSpawnerSigns(PlayerInteractEvent e) {
+		
 		if (!(e.getAction() == Action.RIGHT_CLICK_BLOCK)) return;
 		
 		if (e.getClickedBlock() == null || e.getClickedBlock().getType() != Material.WALL_SIGN) return;
@@ -750,9 +747,9 @@ public class PlayerInteract implements Listener {
 						+ "&aYou bought &e" + amount + " " + spawner.getData().toString().toUpperCase() + " &aand your account was debited &e$" + cost + "&a!"));
 			
 			    p.updateInventory();
+			    
 			} else p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8» &cYou do not have the required amount of funds to purchase this item!"));
-			
+
 		}
 	}
-
 }

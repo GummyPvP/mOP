@@ -113,9 +113,9 @@ public class EntityDamageByEntity implements Listener {
 		if (CombatManager.getInstance().isInCombat(p)) {
 
 			p.setHealth(0);
+			
 			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
 					ChatManager.getInstance().getChatPrefix() + " &c" + p.getName() + " logged out of combat!"));
 		}
-
 	}
 }
