@@ -1,7 +1,5 @@
 package mop.listeners;
 
-import java.util.HashMap;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -14,13 +12,10 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import mop.main.Main;
 import mop.managers.ChatManager;
+import mop.managers.CombatManager;
 import net.md_5.bungee.api.ChatColor;
 
 public class EntityDamageByEntity implements Listener {
-
-	public static HashMap<String, Boolean> inCombat = new HashMap<String, Boolean>();
-	public static HashMap<String, Long> combatTime = new HashMap<String, Long>();
-	public static HashMap<String, BukkitRunnable> combatTimer = new HashMap<String, BukkitRunnable>();
 
 	@EventHandler
 	public void onEntityDamageByEntity(EntityDamageByEntityEvent e) {
@@ -45,27 +40,24 @@ public class EntityDamageByEntity implements Listener {
 			if (e.isCancelled())
 				return;
 
-			if (inCombat.containsKey(damaged.getName()) == false) {
+			if (CombatManager.getInstance().isInCombat(damaged)) {
+				
+				CombatManager.getInstance().forceCombatRemove(damaged);
 
-				combatTime.remove(damaged.getName());
-				combatTimer.remove(damaged.getName());
-
-				inCombat.put(damaged.getName(), true);
+				CombatManager.getInstance().setInCombat(damaged, true);
 
 				damaged.sendMessage(
 						ChatColor.translateAlternateColorCodes('&', ChatManager.getInstance().getChatPrefix()
 								+ " &cYou are now in combat! Logging out will result in a penalty."));
 
-				combatTime.put(damaged.getName(), System.currentTimeMillis());
+				CombatManager.getInstance().setLongTime(damaged, System.currentTimeMillis());
 
-				combatTimer.put(damaged.getName(), new BukkitRunnable() {
+				CombatManager.getInstance().setRunnable(damaged, new BukkitRunnable() {
 
 					@Override
 					public void run() {
 
-						inCombat.remove(damaged.getName());
-						combatTime.remove(damaged.getName());
-						combatTimer.remove(damaged.getName());
+						CombatManager.getInstance().forceCombatRemove(damaged);
 
 						damaged.sendMessage(
 								ChatColor.translateAlternateColorCodes('&', ChatManager.getInstance().getChatPrefix()
@@ -74,70 +66,30 @@ public class EntityDamageByEntity implements Listener {
 					}
 				});
 
-				combatTimer.get(damaged.getName()).runTaskLater(Main.getPlugin(), 20 * 15);
-
-			} else {
-
-				if (inCombat.get(damaged.getName())) {
-
-					if (combatTimer.containsKey(damaged.getName())) {
-
-						combatTimer.get(damaged.getName()).cancel();
-						combatTime.put(damaged.getName(), System.currentTimeMillis());
-
-						combatTimer.put(damaged.getName(), new BukkitRunnable() {
-
-							@Override
-							public void run() {
-
-								inCombat.remove(damaged.getName());
-								combatTime.remove(damaged.getName());
-								combatTimer.remove(damaged.getName());
-
-								damaged.sendMessage(ChatColor.translateAlternateColorCodes('&',
-										ChatManager.getInstance().getChatPrefix()
-												+ " &aYou are no longer in combat! You may log out."));
-
-							}
-						});
-
-						combatTimer.get(damaged.getName()).runTaskLater(Main.getPlugin(), 20 * 15);
-
-					} else {
-
-						damaged.kickPlayer(ChatColor.RED
-								+ "An error has occured with CombatTag. Please report this to a staff member.");
-						return;
-
-					}
-
-				}
-
+				CombatManager.getInstance().getRunnable(damaged).runTaskLater(Main.getPlugin(), 20 * 15);
+				
 			}
 
 			//
 
-			if (inCombat.containsKey(damager.getName()) == false) {
+			if (CombatManager.getInstance().isInCombat(damager)) {
+				
+				CombatManager.getInstance().forceCombatRemove(damager);
 
-				combatTime.remove(damager.getName());
-				combatTimer.remove(damager.getName());
-
-				inCombat.put(damager.getName(), true);
+				CombatManager.getInstance().setInCombat(damager, true);
 
 				damager.sendMessage(
 						ChatColor.translateAlternateColorCodes('&', ChatManager.getInstance().getChatPrefix()
 								+ " &cYou are now in combat! Logging out will result in a penalty."));
 
-				combatTime.put(damager.getName(), System.currentTimeMillis());
+				CombatManager.getInstance().setLongTime(damager, System.currentTimeMillis());
 
-				combatTimer.put(damager.getName(), new BukkitRunnable() {
+				CombatManager.getInstance().setRunnable(damager, new BukkitRunnable() {
 
 					@Override
 					public void run() {
 
-						inCombat.remove(damager.getName());
-						combatTime.remove(damager.getName());
-						combatTimer.remove(damager.getName());
+						CombatManager.getInstance().forceCombatRemove(damager);
 
 						damager.sendMessage(
 								ChatColor.translateAlternateColorCodes('&', ChatManager.getInstance().getChatPrefix()
@@ -146,46 +98,8 @@ public class EntityDamageByEntity implements Listener {
 					}
 				});
 
-				combatTimer.get(damager.getName()).runTaskLater(Main.getPlugin(), 20 * 15);
-
-			} else {
-
-				if (inCombat.get(damager.getName())) {
-
-					if (combatTimer.containsKey(damager.getName())) {
-
-						combatTimer.get(damager.getName()).cancel();
-						
-						combatTime.put(damager.getName(), System.currentTimeMillis());
-
-						combatTimer.put(damager.getName(), new BukkitRunnable() {
-
-							@Override
-							public void run() {
-
-								inCombat.remove(damager.getName());
-								combatTime.remove(damager.getName());
-								combatTimer.remove(damager.getName());
-
-								damager.sendMessage(ChatColor.translateAlternateColorCodes('&',
-										ChatManager.getInstance().getChatPrefix()
-												+ " &aYou are no longer in combat! You may log out."));
-
-							}
-						});
-
-						combatTimer.get(damager.getName()).runTaskLater(Main.getPlugin(), 20 * 15);
-
-					} else {
-
-						damager.kickPlayer(ChatColor.RED
-								+ "An error has occured with CombatTag. Please report this to a staff member.");
-						return;
-
-					}
-
-				}
-
+				CombatManager.getInstance().getRunnable(damager).runTaskLater(Main.getPlugin(), 20 * 15);
+				
 			}
 
 		}
@@ -196,7 +110,7 @@ public class EntityDamageByEntity implements Listener {
 
 		Player p = e.getPlayer();
 
-		if (inCombat.containsKey(p.getName())) {
+		if (CombatManager.getInstance().isInCombat(p)) {
 
 			p.setHealth(0);
 			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',

@@ -24,13 +24,14 @@ public class CombatLog implements CommandExecutor {
 
 			if (CombatManager.getInstance().isInCombat(p)) {
 
-				p.sendMessage(ChatColor.translateAlternateColorCodes('&',
-						"&8&l» &cYou are in combat for &e" + CombatManager.getInstance().getCurrentDelay(p) + " &csecond(s)!"));
+				p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &cYou are in combat for &e" + CombatManager.getInstance().getCurrentDelay(p) + " &csecond(s)!"));
+				
 				return true;
 
 			} else {
-				p.sendMessage(
-						ChatColor.translateAlternateColorCodes('&', "&8&l» &aYou are not in combat. You may log out."));
+				
+				p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &aYou are not in combat. You may log out."));
+				
 				return true;
 			}
 		}
