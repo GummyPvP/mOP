@@ -1,6 +1,7 @@
 package mop.listeners;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,7 +14,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import mop.main.Main;
 import mop.managers.ChatManager;
 import mop.managers.CombatManager;
-import net.md_5.bungee.api.ChatColor;
 
 public class EntityDamageByEntity implements Listener {
 
