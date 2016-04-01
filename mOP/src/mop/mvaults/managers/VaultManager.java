@@ -72,6 +72,7 @@ public class VaultManager {
 		
 		
 	}
+	
 	public void saveInventory(ItemStack[] inv, int inventory, Player p) {
 		
 		File cfile = new File("plugins/mOP/mVaults/" + p.getName() + ".yml");

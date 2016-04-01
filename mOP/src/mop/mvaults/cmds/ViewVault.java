@@ -28,18 +28,21 @@ public class ViewVault implements CommandExecutor {
 			return true;
 			
 		}
+		
 		Player p = (Player) sender;
+		
 		if (cmd.getName().equalsIgnoreCase("viewvault")) {
 			if (sender.hasPermission("mvault.viewvault") == false) {
 				ChatManager.getInstance().messageNoPermission(sender);
 				return true;
 			}
 		}
+		
 		if (args.length == 0) {
 			
 			sender.sendMessage(ChatColor.RED + "/viewvault <player> <number>");
 
-		return true;
+			return true;
 		}
 		if (args.length == 1) {
 			sender.sendMessage(ChatColor.RED + "/viewvault <player> <number>");
@@ -84,7 +87,7 @@ public class ViewVault implements CommandExecutor {
 			
 		}
 		
-		return false;
+		return true;
 	}
 
 }
