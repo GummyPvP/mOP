@@ -99,7 +99,7 @@ public class CombatManager {
 			public void run() {
 				if (timerMap.get(p.getName()) <= 0) {
 					timerMap.keySet().remove(p.getName());
-					p.sendMessage(ChatColor.GREEN + "You can throw another pearl!");
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8» &aYou can use another enderpearl!"));
 					Bukkit.getScheduler().cancelTask(runMap.get(p.getName()));
 				} else {
 					timerMap.replace(p.getName(), timerMap.get(p.getName()), (timerMap.get(p.getName()) - 1));

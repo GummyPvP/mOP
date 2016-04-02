@@ -84,7 +84,7 @@ public class EntityDamageByEntity implements Listener {
 						ChatColor.translateAlternateColorCodes('&', ChatManager.getInstance().getChatPrefix()
 								+ " &cYou are now in combat! Logging out will result in a penalty."));
 				
-				CombatManager.getInstance().setRunnable(damaged, Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(), new Runnable() {
+				CombatManager.getInstance().setRunnable(damager, Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(), new Runnable() {
 
 					@Override
 					public void run() {
@@ -99,7 +99,7 @@ public class EntityDamageByEntity implements Listener {
 							
 							Bukkit.getScheduler().cancelTask(CombatManager.getInstance().getRunnable(damager));
 							
-						} else CombatManager.getInstance().setDelayTime(damaged, (CombatManager.getInstance().getDelayTime(damager) - 1));
+						} else CombatManager.getInstance().setDelayTime(damager, (CombatManager.getInstance().getDelayTime(damager) - 1));
 						
 					}
 					

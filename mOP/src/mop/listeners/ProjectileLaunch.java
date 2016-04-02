@@ -1,6 +1,7 @@
 package mop.listeners;
 
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,14 +23,18 @@ public class ProjectileLaunch implements Listener {
 				
 				Player p = (Player) pearl.getShooter();
 				
+				if (p.getGameMode() == GameMode.CREATIVE || p.getGameMode() == GameMode.CREATIVE) return;
+				if (p.hasPermission("mop.pearlcooldown.bypass")) return;
+				
 				if (CombatManager.getInstance().isInPearlTimer(p)) {
 					
 					e.setCancelled(true);
+					p.getItemInHand().setAmount(p.getInventory().getItemInHand().getAmount() + 1);
 					
 					String second = CombatManager.getInstance().getPearlTime(p) == 1 ? "second" : "seconds";
 					
-					p.sendMessage(ChatColor.RED + "You can't throw your pearl for another " + CombatManager.getInstance().getPearlTime(p)
-							+ " " + second + "!");
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8» &cYou can't throw your pearl for another " + CombatManager.getInstance().getPearlTime(p)
+							+ " " + second + "!"));
 					
 				} else {
 					
