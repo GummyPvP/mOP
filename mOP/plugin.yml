@@ -1,0 +1,117 @@
+name: mOP
+version: 1.0
+main: mop.main.Main
+description:
+authors: [mckpvp, Googlelover1234, xXkguyXx(will remove this cause its temp so i can download mOP)]
+commands:
+    setspawn:
+      description:
+      usage: /<command>
+    spawn:
+      description:
+      usage: /<command> (name)
+    mecon:
+      description:
+      usage: /<command>
+      aliases: [eco]
+    reload:
+      description:
+      usage: /<command>
+    reset:
+      description:
+      usage: /<command> (name)
+    combatlog:
+      description:
+      usage: /<command>
+      aliases: [ct, combattag, cl]
+    givekey:
+      description:
+      usage: /<command> (name) (keytype)
+      aliases: [gk]
+    vote:
+      description:
+      usage: /<command>
+    jellyLegs:
+      description:
+      usage: /<command>
+      aliases: [jl]
+    balance:
+      description:
+      usage: /<command>
+      aliases: [bal, money]
+    giveitem:
+      description:
+      usage: /<command>
+      aliases: [i, give]
+    enchant:
+      description:
+      usage: /<command>
+      aliases: [e]
+    pay:
+      description:
+      usage: /<command>
+    rename:
+      description:
+      usage: /<command>
+    givevoucher:
+      description:
+      usage: /<command>
+    ip:
+      description:
+      usage: /<command>
+    createcrate:
+      description:
+      usage: /<command>
+    removecrate:
+      description:
+      usage: /<command>
+    maintenancemode:
+      description:
+      usage: /<command>
+      aliases: mm
+    vault:
+      description:
+      usage: /<command>
+      aliases: pv
+    viewvault:
+      description:
+      usage: /<command>
+      aliases: vpv
+        
+permissions:
+    mstats.reload:
+      description:
+      default: op
+    mstats.reset:
+      description:
+      default: op
+    mop.jellylegs:
+      description:
+      default: op
+    mop.balance:
+      description:
+      default: op
+    mop.pay:
+      description:
+      default: op
+    mop.giveitem:
+      description:
+      default: op
+    mop.rename:
+      description:
+      default: op
+    mop.ipcheck:
+      description:
+      default: op
+    mop.givevoucher:
+      description:
+      default: op
+    mop.setip:
+      description:
+      default: op
+    mop.createcrate:
+      description:
+      default: op
+    mop.removecrate:
+      description:
+      default: op
