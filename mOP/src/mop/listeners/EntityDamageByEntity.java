@@ -50,8 +50,11 @@ public class EntityDamageByEntity implements Listener {
 				
 			}
 			
-			CombatManager.getInstance().setDelayTime(damaged, CombatManager.delay);
-			CombatManager.getInstance().setDelayTime(damager, CombatManager.delay);
+			damaged.sendMessage(ChatColor.translateAlternateColorCodes('&', ChatManager.getInstance().getChatPrefix() + " &cYou are now in combat. Do not log out."));
+			damager.sendMessage(ChatColor.translateAlternateColorCodes('&', ChatManager.getInstance().getChatPrefix() + " &cYou are now in combat. Do not log out."));
+			
+			CombatManager.getInstance().setInCombat(damaged, true);
+			CombatManager.getInstance().setInCombat(damager, true);
 			
 			CombatManager.getInstance().startCombatTimer(damaged);
 			CombatManager.getInstance().startCombatTimer(damager);

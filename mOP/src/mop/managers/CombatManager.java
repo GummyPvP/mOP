@@ -10,7 +10,7 @@ import mop.main.Main;
 
 public class CombatManager {
 	
-	public static int delay = 15, pearlDelay = 10;
+	public static final int delay = 15, pearlDelay = 10;
 	
 	public HashMap<String, Boolean> inCombat = new HashMap<String, Boolean>();
 	public HashMap<String, Integer> combatTime = new HashMap<String, Integer>();
@@ -43,13 +43,15 @@ public class CombatManager {
 	
 	public int getDelayTime(Player p) {
 		
+		if (combatTime.get(p.getName()) == null) return -1;
+		
 		return combatTime.get(p.getName());
 		
 	}
 	
 	public void setDelayTime(Player p, int delay) {
 		
-		combatTime.replace(p.getName(), delay);
+		combatTime.put(p.getName(), delay);
 		
 	}
 	
@@ -79,17 +81,16 @@ public class CombatManager {
 											+ " &aYou are no longer in combat! You may log out."));
 					
 					Bukkit.getScheduler().cancelTask(combatTimer.get(p.getName()));
-				} else timerMap.replace(p.getName(), combatTime.get(p.getName()), (combatTime.get(p.getName()) - 1));
+				} else combatTime.replace(p.getName(), combatTime.get(p.getName()), (combatTime.get(p.getName()) - 1));
 			}
-
 		}, 0L, 20L));
-		
 	}
 	
 	public void forceCombatRemove(Player p) {
 		
-		combatTimer.remove(p.getName());
 		inCombat.put(p.getName(), false);
+		
+		Bukkit.getScheduler().cancelTask(combatTimer.get(p.getName()));
 		
 	}
 	
