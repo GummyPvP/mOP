@@ -97,10 +97,10 @@ public class CombatManager {
 		runMap.put(p.getName(), Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(), new Runnable() {
 
 			public void run() {
-				if (timerMap.get(p) <= 0) {
-					timerMap.keySet().remove(p);
+				if (timerMap.get(p.getName()) <= 0) {
+					timerMap.keySet().remove(p.getName());
 					p.sendMessage(ChatColor.GREEN + "You can throw another pearl!");
-					Bukkit.getScheduler().cancelTask(runMap.get(p));
+					Bukkit.getScheduler().cancelTask(runMap.get(p.getName()));
 				} else {
 					timerMap.replace(p.getName(), timerMap.get(p.getName()), (timerMap.get(p.getName()) - 1));
 				}
