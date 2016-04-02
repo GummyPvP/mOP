@@ -2,7 +2,7 @@ name: mOP
 version: 1.0
 main: mop.main.Main
 description:
-authors: [mckpvp, Googlelover1234, xXkguyXx]
+authors: [mckpvp, Googlelover1234, xXkguyXx(will remove this cause its temp so i can download mOP)]
 commands:
     setspawn:
       description:
