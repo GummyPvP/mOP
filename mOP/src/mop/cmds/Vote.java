@@ -12,7 +12,8 @@ public class Vote implements CommandExecutor {
 		
 		if (cmd.getName().equalsIgnoreCase("Vote")) {
 			sender.sendMessage(" ");
-			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &aVote at these fine websites to get rewards!"));
+			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &aVote at these fine websites to get rewards!")); 
+			
 			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &ahttp://gummypvp.com/vote"));
 			
 			sender.sendMessage(" ");
