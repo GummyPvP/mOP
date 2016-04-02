@@ -88,10 +88,13 @@ public class CombatManager {
 	
 	public void forceCombatRemove(Player p) {
 		
-		inCombat.put(p.getName(), false);
-		
-		Bukkit.getScheduler().cancelTask(combatTimer.get(p.getName()));
-		
+		if (inCombat.containsKey(p.getName())) {
+			
+			inCombat.put(p.getName(), false);
+			
+			Bukkit.getScheduler().cancelTask(combatTimer.get(p.getName()));
+			
+		}
 	}
 	
 	// pearl
