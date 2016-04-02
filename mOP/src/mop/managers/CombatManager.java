@@ -65,6 +65,27 @@ public class CombatManager {
 		
 	}
 	
+	public void startCombatTimer(final Player p) {
+		
+		combatTimer.put(p.getName(), Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(), new Runnable() {
+
+			public void run() {
+				
+				if (combatTime.get(p.getName()) <= 0) {
+					
+					combatTime.keySet().remove(p.getName());
+					
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&', ChatManager.getInstance().getChatPrefix()
+											+ " &aYou are no longer in combat! You may log out."));
+					
+					Bukkit.getScheduler().cancelTask(combatTimer.get(p.getName()));
+				} else timerMap.replace(p.getName(), combatTime.get(p.getName()), (combatTime.get(p.getName()) - 1));
+			}
+
+		}, 0L, 20L));
+		
+	}
+	
 	public void forceCombatRemove(Player p) {
 		
 		combatTimer.remove(p.getName());
@@ -97,13 +118,15 @@ public class CombatManager {
 		runMap.put(p.getName(), Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(), new Runnable() {
 
 			public void run() {
+				
 				if (timerMap.get(p.getName()) <= 0) {
+					
 					timerMap.keySet().remove(p.getName());
+					
 					p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8» &aYou can use another enderpearl!"));
+					
 					Bukkit.getScheduler().cancelTask(runMap.get(p.getName()));
-				} else {
-					timerMap.replace(p.getName(), timerMap.get(p.getName()), (timerMap.get(p.getName()) - 1));
-				}
+				} else timerMap.replace(p.getName(), timerMap.get(p.getName()), (timerMap.get(p.getName()) - 1));
 			}
 
 		}, 0L, 20L));
