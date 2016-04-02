@@ -26,8 +26,10 @@ public class ProjectileLaunch implements Listener {
 					
 					e.setCancelled(true);
 					
+					String second = CombatManager.getInstance().getPearlTime(p) == 1 ? "second" : "seconds";
+					
 					p.sendMessage(ChatColor.RED + "You can't throw your pearl for another " + CombatManager.getInstance().getPearlTime(p)
-							+ " seconds!");
+							+ " " + second + "!");
 					
 				} else {
 					

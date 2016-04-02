@@ -76,7 +76,7 @@ public class CombatManager {
 	
 	public void setPearlTimer(Player p, int integer) {
 		
-		timerMap.replace(p.getName(), integer);
+		timerMap.put(p.getName(), integer);
 		
 	}
 	
@@ -88,7 +88,7 @@ public class CombatManager {
 	
 	public int getPearlTime(Player p) {
 		
-		return timerMap.get(p);
+		return timerMap.get(p.getName());
 		
 	}
 	
