@@ -39,8 +39,6 @@ public class EntityDamageByEntity implements Listener {
 			if (e.isCancelled())
 				return;
 
-			if (CombatManager.getInstance().isInCombat(damaged)) {
-				
 				CombatManager.getInstance().forceCombatRemove(damaged);
 
 				CombatManager.getInstance().setInCombat(damaged, true);
@@ -70,12 +68,8 @@ public class EntityDamageByEntity implements Listener {
 					
 				}, 0L, 20L));
 				
-			}
-
 			//
 
-			if (CombatManager.getInstance().isInCombat(damager)) {
-				
 				CombatManager.getInstance().forceCombatRemove(damager);
 
 				CombatManager.getInstance().setInCombat(damager, true);
@@ -106,7 +100,6 @@ public class EntityDamageByEntity implements Listener {
 				}, 0L, 20L));
 		}
 	}
-}
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onQuit(PlayerQuitEvent e) {
