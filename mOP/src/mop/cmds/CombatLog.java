@@ -24,7 +24,7 @@ public class CombatLog implements CommandExecutor {
 
 			if (CombatManager.getInstance().isInCombat(p)) {
 
-				if (CombatManager.getInstance().getCurrentDelay(p) <= 0) {
+				if (CombatManager.getInstance().getDelayTime(p) <= 0) {
 
 					CombatManager.getInstance().forceCombatRemove(p);
 					p.sendMessage(ChatColor.translateAlternateColorCodes('&',
@@ -34,7 +34,7 @@ public class CombatLog implements CommandExecutor {
 				}
 
 				p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &cYou are in combat for &e"
-						+ CombatManager.getInstance().getCurrentDelay(p) + " &csecond(s)!"));
+						+ CombatManager.getInstance().getDelayTime(p) + " &cmore second(s)!"));
 
 				return true;
 
@@ -42,6 +42,7 @@ public class CombatLog implements CommandExecutor {
 				p.sendMessage(
 						ChatColor.translateAlternateColorCodes('&', "&8&l» &aYou are not in combat. You may log out."));
 		}
+		
 		return true;
 	}
 }

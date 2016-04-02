@@ -9,7 +9,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import mop.main.Main;
 import mop.managers.ChatManager;
@@ -50,23 +49,26 @@ public class EntityDamageByEntity implements Listener {
 						ChatColor.translateAlternateColorCodes('&', ChatManager.getInstance().getChatPrefix()
 								+ " &cYou are now in combat! Logging out will result in a penalty."));
 
-				CombatManager.getInstance().setLongTime(damaged, System.currentTimeMillis());
-
-				CombatManager.getInstance().setRunnable(damaged, new BukkitRunnable() {
+				CombatManager.getInstance().setRunnable(damaged, Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(), new Runnable() {
 
 					@Override
 					public void run() {
+						
+						if (CombatManager.getInstance().getDelayTime(damaged) <= 0) {
+							
+							CombatManager.getInstance().forceCombatRemove(damaged);
 
-						CombatManager.getInstance().forceCombatRemove(damaged);
-
-						damaged.sendMessage(
-								ChatColor.translateAlternateColorCodes('&', ChatManager.getInstance().getChatPrefix()
-										+ " &aYou are no longer in combat! You may log out."));
-
+							damaged.sendMessage(
+									ChatColor.translateAlternateColorCodes('&', ChatManager.getInstance().getChatPrefix()
+											+ " &aYou are no longer in combat! You may log out."));
+							
+							Bukkit.getScheduler().cancelTask(CombatManager.getInstance().getRunnable(damaged));
+							
+						} else CombatManager.getInstance().setDelayTime(damaged, (CombatManager.getInstance().getDelayTime(damaged) - 1));
+						
 					}
-				});
-
-				CombatManager.getInstance().getRunnable(damaged).runTaskLater(Main.getPlugin(), 20 * 15);
+					
+				}, 0L, 20L));
 				
 			}
 
@@ -81,29 +83,30 @@ public class EntityDamageByEntity implements Listener {
 				damager.sendMessage(
 						ChatColor.translateAlternateColorCodes('&', ChatManager.getInstance().getChatPrefix()
 								+ " &cYou are now in combat! Logging out will result in a penalty."));
-
-				CombatManager.getInstance().setLongTime(damager, System.currentTimeMillis());
-
-				CombatManager.getInstance().setRunnable(damager, new BukkitRunnable() {
+				
+				CombatManager.getInstance().setRunnable(damaged, Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(), new Runnable() {
 
 					@Override
 					public void run() {
+						
+						if (CombatManager.getInstance().getDelayTime(damager) <= 0) {
+							
+							CombatManager.getInstance().forceCombatRemove(damager);
 
-						CombatManager.getInstance().forceCombatRemove(damager);
-
-						damager.sendMessage(
-								ChatColor.translateAlternateColorCodes('&', ChatManager.getInstance().getChatPrefix()
-										+ " &aYou are no longer in combat! You may log out."));
-
+							damager.sendMessage(
+									ChatColor.translateAlternateColorCodes('&', ChatManager.getInstance().getChatPrefix()
+											+ " &aYou are no longer in combat! You may log out."));
+							
+							Bukkit.getScheduler().cancelTask(CombatManager.getInstance().getRunnable(damager));
+							
+						} else CombatManager.getInstance().setDelayTime(damaged, (CombatManager.getInstance().getDelayTime(damager) - 1));
+						
 					}
-				});
-
-				CombatManager.getInstance().getRunnable(damager).runTaskLater(Main.getPlugin(), 20 * 15);
-				
-			}
-
+					
+				}, 0L, 20L));
 		}
 	}
+}
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onQuit(PlayerQuitEvent e) {
