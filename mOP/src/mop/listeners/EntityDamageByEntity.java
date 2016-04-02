@@ -50,6 +50,9 @@ public class EntityDamageByEntity implements Listener {
 				
 			}
 			
+			CombatManager.getInstance().setDelayTime(damaged, CombatManager.delay);
+			CombatManager.getInstance().setDelayTime(damager, CombatManager.delay);
+			
 			CombatManager.getInstance().startCombatTimer(damaged);
 			CombatManager.getInstance().startCombatTimer(damager);
 		}
