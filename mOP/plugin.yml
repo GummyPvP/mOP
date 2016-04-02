@@ -1,8 +1,8 @@
 name: mOP
-version: 0.1
+version: 1.0
 main: mop.main.Main
 description:
-authors: [mckpvp, Googlelover1234, xXkguyXx]
+authors: [mckpvp, Googlelover1234, xXkguyXx(kguy)]
 commands:
     setspawn:
       description:

@@ -109,6 +109,7 @@ public class Main extends JavaPlugin {
 		getCommand("vault").setExecutor(new Vault());
 		getCommand("viewvault").setExecutor(new ViewVault());
 	}
+	
 	public void loadEconomy() {
 		
 		for (Player online : Bukkit.getServer().getOnlinePlayers()) {
@@ -117,8 +118,9 @@ public class Main extends JavaPlugin {
 			
 			econ.setupPlayer();
 			
-	    	}
-		}
+	    }
+	}
+	
 	public void loadSpawn() {
 		
 		mop.mspawn.utils.ConfigManager.getInstance().setup(this);
@@ -136,11 +138,13 @@ public class Main extends JavaPlugin {
 		}
 		
 	}
+	
 	public static Plugin getPlugin() {
 		
 		return Bukkit.getPluginManager().getPlugin("mOP");
 		
 	}
+	
 	private void loadListeners(Listener... listeners) {
 		
 		for (Listener l : listeners) {
@@ -149,5 +153,4 @@ public class Main extends JavaPlugin {
 			
 		}
 	}
-
 }
