@@ -38,20 +38,26 @@ public class EntityDamageByEntity implements Listener {
 			if (e.isCancelled())
 				return;
 			
-			if (CombatManager.getInstance().isInCombat(damaged)) {
+			if (CombatManager.getInstance().isInCombat(damaged) == false) {
 				
-				CombatManager.getInstance().forceCombatRemove(damaged);
+				damaged.sendMessage(ChatColor.translateAlternateColorCodes('&', ChatManager.getInstance().getChatPrefix() + " &cYou are now in combat. Do not log out."));
+
+			}
+				
+			if (CombatManager.getInstance().isInCombat(damager) == false) {
+				
+				damager.sendMessage(ChatColor.translateAlternateColorCodes('&', ChatManager.getInstance().getChatPrefix() + " &cYou are now in combat. Do not log out."));
 				
 			}
 			
-			if (CombatManager.getInstance().isInCombat(damager)) {
-				
-				CombatManager.getInstance().forceCombatRemove(damager);
-				
-			}
-			
-			CombatManager.getInstance().startCombatTimer(damaged);
+			CombatManager.getInstance().forceCombatRemove(damager);
+			CombatManager.getInstance().setInCombat(damager, true);
 			CombatManager.getInstance().startCombatTimer(damager);
+			
+			CombatManager.getInstance().forceCombatRemove(damaged);
+			CombatManager.getInstance().setInCombat(damaged, true);
+			CombatManager.getInstance().startCombatTimer(damaged);
+			
 		}
 	}
 
@@ -64,8 +70,7 @@ public class EntityDamageByEntity implements Listener {
 
 			p.setHealth(0);
 			
-			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-					ChatManager.getInstance().getChatPrefix() + " &c" + p.getName() + " logged out of combat!"));
+			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', ChatManager.getInstance().getChatPrefix() + " &c" + p.getName() + " logged out of combat!"));
 		}
 	}
 }
