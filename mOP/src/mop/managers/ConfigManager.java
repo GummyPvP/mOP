@@ -29,24 +29,23 @@ public class ConfigManager {
 	FileConfiguration config;
 	File cfile;
 
-	
-    File crates = new File("plugins/mOP/","crates.yml");
+	File crates = new File("plugins/mOP/", "crates.yml");
 	FileConfiguration cratesfile = YamlConfiguration.loadConfiguration(crates);
-	
+
 	public void setup(Plugin p) {
-		
+
 		try {
 			saveCratesConfig();
-			
+
 			ArrayList<String> temp = new ArrayList<String>();
 			temp.add("LOC:1");
 			temp.add("LOC:2");
 			getCratesConfig().addDefault("crates", temp);
-			
+
 			getCratesConfig().options().copyDefaults(true);
-			
+
 			saveCratesConfig();
-			
+
 		} catch (Exception e) {
 
 		}
@@ -62,14 +61,17 @@ public class ConfigManager {
 		}
 
 	}
+
 	public FileConfiguration getConfig() {
 		return config;
 
 	}
+
 	public FileConfiguration getCratesConfig() {
 		return cratesfile;
 
 	}
+
 	public void addLocation(String l) {
 		List<String> current = new ArrayList<String>();
 		current.clear();
@@ -80,6 +82,7 @@ public class ConfigManager {
 		getCratesConfig().set("crates", current);
 		saveCratesConfig();
 	}
+
 	public boolean checkLocation(String location) {
 		if (getCratesConfig().getStringList("crates").contains(location) == true) {
 			return true;
@@ -87,6 +90,7 @@ public class ConfigManager {
 			return false;
 		}
 	}
+
 	public void saveCratesConfig() {
 		try {
 			cratesfile.save(crates);
@@ -94,27 +98,30 @@ public class ConfigManager {
 			e.printStackTrace();
 		}
 	}
+
 	public void saveConfig() {
 		try {
 			config.save(cfile);
 
 		} catch (IOException e) {
-			Bukkit.getServer().getLogger()
-					.severe(ChatColor.RED + "Could not save config.yml!");
+			Bukkit.getServer().getLogger().severe(ChatColor.RED + "Could not save config.yml!");
 
 		}
 	}
+
 	public void reloadConfig() {
 		config = YamlConfiguration.loadConfiguration(cfile);
 
 	}
+
 	public PluginDescriptionFile getDesc() {
 		return p.getDescription();
 
 	}
+
 	public Plugin getPlugin() {
 		return p;
 
 	}
-	
+
 }

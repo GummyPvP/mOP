@@ -7,12 +7,10 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-
 public class mEcon {
-	
-	
+
 	static Player p;
-	
+
 	@SuppressWarnings("static-access")
 	public mEcon(Player p) {
 
@@ -26,8 +24,8 @@ public class mEcon {
 
 	}
 
-	String dir =  "plugins/mEconomy/money.yml"; 
-	
+	String dir = "plugins/mEconomy/money.yml";
+
 	public void setupPlayer() {
 		File file = new File(dir);
 		FileConfiguration config = YamlConfiguration.loadConfiguration(file);
@@ -40,6 +38,7 @@ public class mEcon {
 			}
 		}
 	}
+
 	public boolean offlinePlayerExsists(OfflinePlayer p) {
 		File file = new File(dir);
 		FileConfiguration config = YamlConfiguration.loadConfiguration(file);
@@ -49,7 +48,7 @@ public class mEcon {
 			return false;
 		}
 	}
-	
+
 	public void setOfflinePlayerBalance(OfflinePlayer p, int amount) {
 		File file = new File(dir);
 		FileConfiguration config = YamlConfiguration.loadConfiguration(file);
@@ -60,38 +59,43 @@ public class mEcon {
 			e.printStackTrace();
 		}
 	}
+
 	public void addOfflinePlayerMoney(OfflinePlayer p, int amount) {
 		this.setOfflinePlayerBalance(p, this.getOfflinePlayerBalance(p) + amount);
 	}
+
 	public int getOfflinePlayerBalance(OfflinePlayer p) {
 		File file = new File(dir);
 		FileConfiguration config = YamlConfiguration.loadConfiguration(file);
 		return config.getInt("balance." + p.getName());
 	}
-	
+
 	public boolean removeMoneyOfflinePlayer(OfflinePlayer p, int amount) {
-		if (this.getOfflinePlayerBalance(p)- amount < 0) return false;
-		
-		setOfflinePlayerBalance(p ,this.getOfflinePlayerBalance(p) - amount);
+		if (this.getOfflinePlayerBalance(p) - amount < 0)
+			return false;
+
+		setOfflinePlayerBalance(p, this.getOfflinePlayerBalance(p) - amount);
 		return true;
 	}
-	
-	
-	
+
 	public int getBalance() {
 		File file = new File(dir);
 		FileConfiguration config = YamlConfiguration.loadConfiguration(file);
 		return config.getInt("balance." + p.getName());
 	}
+
 	public void addMoney(int amount) {
 		this.setBalance(this.getBalance() + amount);
 	}
+
 	public boolean removeMoney(int amount) {
-		if (this.getBalance() - amount < 0) return false;
-		
+		if (this.getBalance() - amount < 0)
+			return false;
+
 		setBalance(this.getBalance() - amount);
 		return true;
 	}
+
 	public void setBalance(int amount) {
 		File file = new File(dir);
 		FileConfiguration config = YamlConfiguration.loadConfiguration(file);
