@@ -1,5 +1,8 @@
 package mop.mvaults.listeners;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -15,14 +18,26 @@ public class InventoryClose implements Listener {
 		String inv_name = e.getInventory().getName();
 		
 		if (inv_name.contains("Vault") == true) {
+			
+			String oldString = null;
+			
+			Pattern pattern = Pattern.compile("/[#]+[0-9]/");
 		
-		String inv_number = inv_name.replaceAll("\\D+","");
+			Matcher m = pattern.matcher(inv_name);
 		
-		String[] each_string = inv_name.split(" ");
+			while (m.find()) {
+				
+				oldString = m.group(1);
+			
+			}
 		
-		ItemStack[] items = e.getInventory().getContents();
+			String inv_number = oldString.replaceAll("[#]", "");
 		
-		VaultManager.getInstance().saveInventory(items, Integer.parseInt(inv_number), each_string[1]);
+			String[] each_string = inv_name.split(" ");
+		
+			ItemStack[] items = e.getInventory().getContents();
+		
+			VaultManager.getInstance().saveInventory(items, Integer.parseInt(inv_number), each_string[1]);
 		
 		}
 	}

@@ -48,7 +48,6 @@ import mop.mspawn.cmds.SetSpawn;
 import mop.mspawn.cmds.Spawn;
 import mop.mspawn.listeners.PlayerMove;
 import mop.mspawn.listeners.PlayerRespawn;
-import mop.mvaults.cmds.Vault;
 import mop.mvaults.cmds.ViewVault;
 import mop.mvaults.listeners.InventoryClose;
 import mop.mvaults.managers.VaultManager;
@@ -108,7 +107,7 @@ public class Main extends JavaPlugin {
 		getCommand("mecon").setExecutor(new Econ());
 		getCommand("Spawn").setExecutor(new Spawn());
 		getCommand("SetSpawn").setExecutor(new SetSpawn());
-		getCommand("vault").setExecutor(new Vault());
+		//getCommand("vault").setExecutor(new Vault());
 		getCommand("viewvault").setExecutor(new ViewVault());
 	}
 	
