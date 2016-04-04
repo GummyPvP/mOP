@@ -1,15 +1,12 @@
 package mop.managers;
 
 import java.text.DecimalFormat;
-
-import mauth.api.mAuthAPI;
+import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -23,7 +20,11 @@ import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 
+import mauth.api.mAuthAPI;
+
 public class Manager {
+	
+	public HashMap<Player, Boolean> jellyLegs = new HashMap<Player, Boolean>();
 
 	FileConfiguration config = StatsManager.getInstance().getConfig();
 
@@ -42,15 +43,7 @@ public class Manager {
 		
 		
 	}
-	public void setSpawn(Player p) {
-		config.set("spawn.w", p.getWorld().getName());
-		config.set("spawn.x", p.getLocation().getX());
-		config.set("spawn.y", p.getLocation().getY());
-		config.set("spawn.z", p.getLocation().getZ());
-		config.set("spawn.pitch", p.getLocation().getPitch());
-		config.set("spawn.yaw", p.getLocation().getYaw());
-		StatsManager.getInstance().reloadConfig();
-	}
+
 	public void adminMessage(String msg) {
 		Player xxkguyxx = Bukkit.getPlayer("xXkguyXx");
 		Player googlelover = Bukkit.getPlayer("Googlelover1234");
@@ -82,24 +75,6 @@ public class Manager {
 			Emperor_Koala.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
 			}
 		}
-	}
-	public void teleportSpawn(Player p) {
-		if (config.getString("spawn") == null) {
-			p.sendMessage(ChatColor.RED + "Spawn isn't set.");
-			return;
-		}
-
-		World w = Bukkit.getWorld(config.getString("spawn.w"));
-		Double x = Double.valueOf(config.getDouble("spawn.x"));
-		Double y = Double.valueOf(config.getDouble("spawn.y"));
-		Double z = Double.valueOf(config.getDouble("spawn.z"));
-		Float pitch = Float.valueOf((float) config.getDouble("spawn.pitch"));
-		Float yaw = Float.valueOf((float) config.getDouble("spawn.yaw"));
-		Location spawn = new Location(w, x.doubleValue(), y.doubleValue(),
-				z.doubleValue());
-		spawn.setPitch(pitch.floatValue());
-		spawn.setYaw(yaw.floatValue());
-		p.teleport(spawn);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -300,5 +275,20 @@ public class Manager {
 			p.sendMessage(ChatColor.translateAlternateColorCodes('&',
 					"&8&l» &cA Sloom has been added to your inventory."));
 		}
+	}
+	
+	public void setJellyLegsEnabled(Player p, boolean b) {
+		
+		jellyLegs.put(p, b);
+		
+	}
+	
+	public boolean isJellyLegsEnabled(Player p) {
+		
+		if (jellyLegs.containsKey(p)) {
+			
+			return jellyLegs.get(p);
+			
+		} else return false;
 	}
 }

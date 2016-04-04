@@ -11,7 +11,7 @@ public class CommandPreprocess implements Listener {
 	@EventHandler
 	public void onCommandProcess(PlayerCommandPreprocessEvent e) {
 		Player p = e.getPlayer();
-		if (e.getMessage().toLowerCase().equalsIgnoreCase("/help")) {
+		if (e.getMessage().toLowerCase().equalsIgnoreCase("/help") || e.getMessage().toLowerCase().startsWith("/help ")) {
 			
 			e.setCancelled(true);
 			p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&m----------------------------------------------------"));

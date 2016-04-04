@@ -1,13 +1,13 @@
 package mop.cmds;
 
-import mop.managers.ChatManager;
-import mop.managers.JellyLegsManager;
-
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import mop.managers.ChatManager;
+import mop.managers.Manager;
 
 public class JellyLegs implements CommandExecutor {
 
@@ -22,13 +22,13 @@ public class JellyLegs implements CommandExecutor {
 				ChatManager.getInstance().messageNoPermission(sender);
 				return true;
 			}
-			if (JellyLegsManager.getInstance().isJellyLegsEnabled(p)) {
-				JellyLegsManager.getInstance().setJellyLegs(p, false);
+			if (Manager.getInstance().isJellyLegsEnabled(p)) {
+				Manager.getInstance().setJellyLegsEnabled(p, false);
 				p.sendMessage(ChatColor.translateAlternateColorCodes('&',
 						"&8&l» &aJelly legs " + ChatColor.RED + "disabled!"));
 				return true;
 			} else {
-				JellyLegsManager.getInstance().setJellyLegs(p, true);
+				Manager.getInstance().setJellyLegsEnabled(p, true);
 				p.sendMessage(ChatColor.translateAlternateColorCodes('&',
 						"&8&l» &aJelly legs " + ChatColor.AQUA + "enabled!"));
 				return true;

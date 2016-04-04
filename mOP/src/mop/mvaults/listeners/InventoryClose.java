@@ -31,7 +31,7 @@ public class InventoryClose implements Listener {
 			
 			}
 		
-			String inv_number = oldString.replaceAll("[#]", "");
+			String inv_number = oldString.replaceAll("/#/", "");
 		
 			String[] each_string = inv_name.split(" ");
 		
