@@ -77,6 +77,8 @@ public class CombatManager {
 					
 					combatTime.keySet().remove(p.getName());
 					
+					forceCombatRemove(p);
+					
 					p.sendMessage(ChatColor.translateAlternateColorCodes('&', ChatManager.getInstance().getChatPrefix()
 											+ " &aYou are no longer in combat! You may log out."));
 					

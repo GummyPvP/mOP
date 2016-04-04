@@ -1,12 +1,12 @@
 package mop.listeners;
 
-import mop.managers.JellyLegsManager;
-
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+
+import mop.managers.Manager;
 
 public class EntityDamage implements Listener {
 
@@ -19,7 +19,7 @@ public class EntityDamage implements Listener {
 		
 		Player p = (Player) e.getEntity();
 		
-		if ((JellyLegsManager.getInstance().isJellyLegsEnabled(p)) && (e.getCause().equals(DamageCause.FALL))) {
+		if ((Manager.getInstance().isJellyLegsEnabled(p)) && (e.getCause().equals(DamageCause.FALL))) {
 			e.setCancelled(true);
 		}
 	}

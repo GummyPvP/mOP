@@ -12,6 +12,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import mop.managers.ChatManager;
 import mop.managers.CombatManager;
+import mop.mspawn.utils.SpawnManager;
 
 public class EntityDamageByEntity implements Listener {
 
@@ -37,6 +38,18 @@ public class EntityDamageByEntity implements Listener {
 
 			if (e.isCancelled())
 				return;
+			
+			if (SpawnManager.getInstance().getSpawnLocation().getWorld() == damaged.getLocation().getWorld()) {
+				
+				if (SpawnManager.getInstance().getSpawnLocation().distance(damaged.getLocation()) <= 17) return;
+				
+			}
+			
+			if (SpawnManager.getInstance().getSpawnLocation().getWorld() == damager.getLocation().getWorld()) {
+				
+				if (SpawnManager.getInstance().getSpawnLocation().distance(damager.getLocation()) <= 17) return;
+				
+			}
 			
 			if (CombatManager.getInstance().isInCombat(damaged) == false) {
 				

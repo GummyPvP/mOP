@@ -13,9 +13,16 @@ import mop.main.Main;
 public class TutorialManager {
 	
 	private static TutorialManager configuration = new TutorialManager("tutorial");
+	private static TutorialManager manager = new TutorialManager();
 	
 	public static TutorialManager getTutorialFile() {
 		return configuration;
+	}
+	
+	public static TutorialManager getTutorialManager() {
+		
+		return manager;
+		
 	}
 		
 	private File file;
@@ -40,6 +47,11 @@ public class TutorialManager {
 		}
 		
 		config = YamlConfiguration.loadConfiguration(file);
+		
+	}
+	
+	private TutorialManager() {
+		
 		
 	}
 	
@@ -110,5 +122,19 @@ public class TutorialManager {
 	
 	public int getInt(String string) {
 		return config.getInt(string);
+	}
+	
+	public int getPointAmount() {
+		
+		int amount = 0;
+		
+		for (int i = 0; i < TutorialManager.getTutorialFile().getSection("points").getKeys(false).size(); i++) {
+			
+			amount++;
+			
+		}
+		
+		return amount;
+		
 	}
 }

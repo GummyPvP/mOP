@@ -20,6 +20,7 @@ import mop.cmds.Ip;
 import mop.cmds.JellyLegs;
 import mop.cmds.MaintenanceMode;
 import mop.cmds.Pay;
+import mop.cmds.RandomTP;
 import mop.cmds.Reload;
 import mop.cmds.RemoveCrate;
 import mop.cmds.Rename;
@@ -110,6 +111,7 @@ public class Main extends JavaPlugin {
 		getCommand("SetSpawn").setExecutor(new SetSpawn());
 		getCommand("vault").setExecutor(new Vault());
 		getCommand("viewvault").setExecutor(new ViewVault());
+		getCommand("randomtp").setExecutor(new RandomTP());
 	}
 	
 	public void loadEconomy() {

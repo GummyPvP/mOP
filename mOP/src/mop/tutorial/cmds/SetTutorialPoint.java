@@ -42,11 +42,7 @@ public class SetTutorialPoint implements CommandExecutor {
 			return true;
 		}
 		
-		for (int i = 0; i < TutorialManager.getTutorialFile().getSection("points").getKeys(false).size(); i++) {
-			
-			amount++;
-			
-		}
+		amount += TutorialManager.getTutorialManager().getPointAmount();
 		
 		amount++;
 		

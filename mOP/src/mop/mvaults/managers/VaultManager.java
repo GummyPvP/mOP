@@ -100,6 +100,7 @@ public class VaultManager {
 		
 		
 	}
+	
 	@SuppressWarnings("unchecked")
 	public Inventory getInventory(int inventory, Player p) {
 		
