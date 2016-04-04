@@ -39,6 +39,8 @@ public class EntityDamageByEntity implements Listener {
 			if (e.isCancelled())
 				return;
 			
+			if (mgeneral.utilites.Manager.getInstance().checkVanishEnabled(damaged) || mgeneral.utilites.Manager.getInstance().checkVanishEnabled(damager)) return;
+			
 			if (SpawnManager.getInstance().getSpawnLocation().getWorld() == damaged.getLocation().getWorld()) {
 				
 				if (SpawnManager.getInstance().getSpawnLocation().distance(damaged.getLocation()) <= 17) return;
@@ -53,11 +55,23 @@ public class EntityDamageByEntity implements Listener {
 			
 			if (CombatManager.getInstance().isInCombat(damaged) == false) {
 				
+				if (damaged.getAllowFlight() == true) {
+					
+					damaged.setAllowFlight(false);
+					
+				}
+				
 				damaged.sendMessage(ChatColor.translateAlternateColorCodes('&', ChatManager.getInstance().getChatPrefix() + " &cYou are now in combat. Do not log out."));
 
 			}
 				
 			if (CombatManager.getInstance().isInCombat(damager) == false) {
+				
+				if (damager.getAllowFlight() == true) {
+					
+					damager.setAllowFlight(false);
+					
+				}
 				
 				damager.sendMessage(ChatColor.translateAlternateColorCodes('&', ChatManager.getInstance().getChatPrefix() + " &cYou are now in combat. Do not log out."));
 				

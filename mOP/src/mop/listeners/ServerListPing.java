@@ -25,6 +25,7 @@ public class ServerListPing implements Listener {
 				"       &b&m-&8»&e&m-&8»&b&m-&8»&e&m-&8» &8[&b✧&8] &b&lGummy PvP &8[&b✧&8] &8«&b&m-&8«&e&m-&8«&b&m-&8«&e&m-&r" + 
 				      " \n " + 
 						"         &a&l(!) &b&lNow Open! Join Today! &a&l(!)"));
+		
 		}
 	}
 }
