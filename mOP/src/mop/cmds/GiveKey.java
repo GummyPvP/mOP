@@ -29,7 +29,7 @@ public class GiveKey implements CommandExecutor {
 					if (sender instanceof Player) {
 						if (args[0].equalsIgnoreCase("common")
 								|| args[0].equalsIgnoreCase("uncommon")
-								|| args[0].equalsIgnoreCase("rare")) {
+								|| args[0].equalsIgnoreCase("rare") || args[0].equalsIgnoreCase("legendary")) {
 							Manager.getInstance().giveKey((Player) sender,
 									KeyType.valueOf(args[0].toUpperCase()));
 							sender.sendMessage(ChatColor
@@ -38,7 +38,7 @@ public class GiveKey implements CommandExecutor {
 						} else
 							sender.sendMessage(ChatColor
 									.translateAlternateColorCodes('&',
-											"&8&l» &cPlease use /givekey COMMON | UNCOMMON | RARE"));
+											"&8&l» &cPlease use /givekey COMMON | UNCOMMON | RARE | LEGENDARY"));
 					} else
 						ChatManager.getInstance().messageSenderPlayerOnly(
 								sender);
@@ -54,7 +54,7 @@ public class GiveKey implements CommandExecutor {
 					}
 					if (args[1].equalsIgnoreCase("common")
 							|| args[1].equalsIgnoreCase("uncommon")
-							|| args[1].equalsIgnoreCase("rare")) {
+							|| args[1].equalsIgnoreCase("rare") || args[1].equalsIgnoreCase("legendary")) {
 						Manager.getInstance().giveKey(target,
 								KeyType.valueOf(args[1].toUpperCase()));
 						sender.sendMessage(ChatColor
@@ -63,7 +63,7 @@ public class GiveKey implements CommandExecutor {
 					} else
 						sender.sendMessage(ChatColor
 								.translateAlternateColorCodes('&',
-										"&8&l» &cPlease use /givekey COMMON|UNCOMMON|RARE"));
+										"&8&l» &cPlease use /givekey COMMON | UNCOMMON | RARE | LEGENDARY"));
 				}
 
 				if (args.length > 2) {

@@ -1,5 +1,6 @@
 package mop.listeners;
 
+import java.util.Arrays;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
@@ -381,139 +382,102 @@ public class PlayerInteract implements Listener {
 			
 		case 2:
 			
-			
-			
-			break;
-			
-		case 3:
+			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &b" + p.getName() + " won... &aa Creeper Spawner Voucher &bfrom an &6Uncommon Crate&a!"));
 			
 			break;
 
 		default:
+			
+			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &b" + p.getName() + " won... &aa Blaze Spawner Voucher &bfrom an &6Uncommon Crate&a!"));
+			
 			break;
 		}
 			
 			break;
+			
+			// Rare Crate
+			
+		case "Rare Crate Key":
+			
+			p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &bYou are opening a &6Uncommon Crate&b..."));
+			
+			p.playEffect(e.getClickedBlock().getLocation(), Effect.STEP_SOUND, 5);
+			p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1F, 1F);
+			
+			if (p.getItemInHand().getAmount() == 1) {
+				
+				p.getInventory().removeItem(p.getItemInHand());
+				
+			} else p.getItemInHand().setAmount(p.getItemInHand().getAmount() - 1);
+			
+			p.updateInventory();
+			
+			switch (r.nextInt(3)) {
+			case 0:
+				
+				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &b" + p.getName() + " won... &a&la Slime Spawner Voucher &bfrom an &6Uncommon Crate&a!"));
+				
+				break;
+				
+			case 1:
+				
+				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "addcredits " + p.getName() + " 75");
+				
+				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &b" + p.getName() + " won... &c75 mcMMO credits &bfrom a &c&lRare Crate!"));
+				
+				break;
 
+			default:
+				
+				mEconAPI.addMoney(p, 2500000);
+				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &b" + p.getName() + " won... &a&l$2,500,000 million dollars &bfrom a &c&lRare Crate!"));
+				
+				break;
+			}
+			
+			break;
+			
+		case "Legendary Crate Key":
+			
+			p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &bYou are opening a &5&lLegendary Crate&b..."));
+			
+			p.playEffect(e.getClickedBlock().getLocation(), Effect.STEP_SOUND, 5);
+			p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1F, 1F);
+			
+			if (p.getItemInHand().getAmount() == 1) {
+				
+				p.getInventory().removeItem(p.getItemInHand());
+				
+			} else p.getItemInHand().setAmount(p.getItemInHand().getAmount() - 1);
+			
+			p.updateInventory();
+			
+			switch (r.nextInt(2)) {
+			
+			case 0:
+				
+				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &b" + p.getName() + " won... &4&la Sloom Kit voucher &bfrom a &5&lLegendary Crate!"));
+				Manager.getInstance().giveVoucher(p, VoucherType.SLOOMKIT);
+				
+				break;
+				
+			case 1:
+				
+				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &b" + p.getName() + " won... &a&lKit Spawner &bfrom a &5&lLegendary Crate!"));
+				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "gkit " + p.getName() + " spawner");
+				
+				break;
+				
+			default:
+				break;
+				
+			}
+			
+			break;
+			
 		default:
 			break;
 		}
-
-
-			// Uncommon Key
-//		 if (p.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GOLD + "Uncommon Crate Key")) {
-//			e.setCancelled(true);
-//			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-//					"&8&l» &b" + p.getName() + " is opening a &6Uncommon Crate&b..."));
-//			p.playEffect(e.getClickedBlock().getLocation(), Effect.STEP_SOUND, 5);
-//			if (p.getItemInHand().getAmount() == 1)
-//				p.getInventory().removeItem(p.getItemInHand());
-//			p.getItemInHand().setAmount(p.getItemInHand().getAmount() - 1);
-//
-//			if (r.nextInt(5) == 0) {
-//				Random random = new Random();
-//				if (r.nextInt(1) == 0) {
-//					Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-//							"&8&l» &b" + p.getName() + " won... &ca Rare Crate Key!"));
-//					Manager.getInstance().giveKey(p, KeyType.RARE);
-//				} else if (random.nextInt(2) == 1) {
-//					Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-//							"&8&l» &b" + p.getName() + " won... &aa Common Crate Key!"));
-//					Manager.getInstance().giveKey(p, KeyType.COMMON);
-//				}
-//			} else if (r.nextInt(5) == 1) {
-//				Bukkit.broadcastMessage(
-//						ChatColor.translateAlternateColorCodes('&', "&8&l» &b" + p.getName() + " won... &aKit Gummy!"));
-//				Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(),
-//						"givekit " + p.getName() + " gummy");
-//
-//			} else if (r.nextInt(5) == 2) {
-//				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-//						"&8&l» &b" + p.getName() + " won... &atheir very own pet doggy!"));
-//				Wolf wolf = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-//				wolf.setCustomNameVisible(true);
-//				wolf.setCustomName(ChatColor.BLUE + p.getName() + "'s " + ChatColor.AQUA + "pet doggy");
-//				wolf.setTamed(true);
-//				wolf.setOwner(p);
-//				wolf.setCollarColor(DyeColor.MAGENTA);
-//				wolf.setAdult();
-//				wolf.setAgeLock(true);
-//				wolf.setAngry(false);
-//				wolf.setMaxHealth(2000.0);
-//				wolf.setHealth(2000.0);
-//			} else if (r.nextInt(5) == 3) {
-//				mEconAPI.addMoney(p, 120000);
-//				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-//						"&8&l» &b" + p.getName() + " won... &a$1,200,000 in cash!"));
-//			} else if (r.nextInt(5) == 4) {
-//				ItemStack elite = new ItemStack(Material.DIAMOND_SWORD);
-//				ItemMeta im = elite.getItemMeta();
-//				im.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&lSloom Sword"));
-//				im.addEnchant(Enchantment.DURABILITY, 15, true);
-//				im.addEnchant(Enchantment.FIRE_ASPECT, 10, true);
-//				im.addEnchant(Enchantment.DAMAGE_ALL, 30, true);
-//				im.addEnchant(Enchantment.LOOT_BONUS_MOBS, 10, true);
-//				ArrayList<String> l = new ArrayList<String>();
-//				l.add(ChatColor.GRAY + "Devour I");
-//				l.add(ChatColor.GRAY + "Bleed I");
-//				im.setLore(l);
-//				elite.setItemMeta(im);
-//				p.getInventory().addItem(elite);
-//				p.updateInventory();
-//				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-//						"&8&l» &b" + p.getName() + " won... &a Sloom Sword!"));
-//			} else {
-//				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-//						"&8&l» &b" + p.getName() + " won... &6a money party for all players online!"));
-//				for (Player online : Bukkit.getOnlinePlayers()) {
-//					online.playSound(p.getLocation(), Sound.FIREWORK_LAUNCH, 1F, 1F);
-//					online.playSound(p.getLocation(), Sound.FIREWORK_LARGE_BLAST2, 1F, 1F);
-//					mEconAPI.addMoney(online, 500000);
-//					online.sendMessage(ChatColor.translateAlternateColorCodes('&',
-//							"&8&l» &aDeposited $500,000 dollars into your account!"));
-//				}
-//			}
-//			p.updateInventory();
-//			// Rare Key
-//		} else if (p.getItemInHand().getItemMeta().getDisplayName()
-//				.equalsIgnoreCase(ChatColor.RED + "Rare Crate Key")) {
-//			e.setCancelled(true);
-//			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-//					"&8&l» &b" + p.getName() + " is opening a &cRare Crate&b..."));
-//			p.playEffect(e.getClickedBlock().getLocation(), Effect.STEP_SOUND, 5);
-//			p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1F, 1F);
-//			if (p.getItemInHand().getAmount() == 1)
-//				p.getInventory().removeItem(p.getItemInHand());
-//			p.getItemInHand().setAmount(p.getItemInHand().getAmount() - 1);
-//
-//			if (r.nextInt(3) == 0) {
-//				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "addcredits " + p.getName() + " 100");
-//				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-//						"&8&l» &b" + p.getName() + " won... &c100 mcMMO credits!"));
-//				p.sendMessage(ChatColor.translateAlternateColorCodes('&',
-//						"&8&l» &aRedeem those tokens using the /redeem command,"));
-//			} else if (r.nextInt(3) == 1) {
-//				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-//						"&8&l» &b" + p.getName() + " won... &6a money party for all players online!"));
-//				for (Player online : Bukkit.getOnlinePlayers()) {
-//					online.playSound(p.getLocation(), Sound.FIREWORK_LAUNCH, 1F, 1F);
-//					online.playSound(p.getLocation(), Sound.FIREWORK_LARGE_BLAST2, 1F, 1F);
-//					mEconAPI.addMoney(online, 1000000);
-//					online.sendMessage(ChatColor.translateAlternateColorCodes('&',
-//							"&8&l» &aDeposited $1,000,000 dollars into your account!"));
-//				}
-//			} else if (r.nextInt(3) == 2) {
-//				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-//						"&8&l» &b" + p.getName() + " won... &6a Random Voucher!"));
-//				Manager.getInstance().giveVoucher(p, VoucherType.RANDOM);
-//			} else {
-//				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-//						"&8&l» &b" + p.getName() + " won... &a Haribo Kit!"));
-//				Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(),
-//						"givekit " + p.getName() + " Haribo");
-//			}
-//			p.updateInventory();
-//		}
 	}
 
 	@SuppressWarnings("deprecation")
@@ -673,59 +637,76 @@ public class PlayerInteract implements Listener {
 
 					} else
 						cost = 1;
+					
+					if (lines[1].contains(" Spawner")) {
+						
+						if (lines[1].contains("Iron")) {
+							
+							ItemStack spawnerItem = new ItemStack(Material.MOB_SPAWNER);
+							
+							ItemMeta spawnerIM = spawnerItem.getItemMeta();
+							
+							spawnerIM.setDisplayName(ChatColor.GREEN + "Iron Golem Spawner");
+							spawnerIM.setLore(Arrays.asList("This is an Iron Golem Spawner!", "Place it where you want mobs to spawn"));
+							
+							spawnerItem.setItemMeta(spawnerIM);
+							
+							p.getInventory().addItem(spawnerItem);
+							
+							return;
+						}
+						
+						if (lines[1].contains("Magma")) {
+							
+							ItemStack spawnerItem = new ItemStack(Material.MOB_SPAWNER);
+							
+							ItemMeta spawnerIM = spawnerItem.getItemMeta();
+							
+							spawnerIM.setDisplayName(ChatColor.GREEN + "Magma Cube Spawner");
+							spawnerIM.setLore(Arrays.asList("This is a Magma Cube Spawner!", "Place it where you want mobs to spawn"));
+							
+							spawnerItem.setItemMeta(spawnerIM);
+							
+							p.getInventory().addItem(spawnerItem);
+							
+							return;
+						}
+						
+						
+						String spawnerType = lines[1].split(" ")[0].toUpperCase();
+						
+						String spawnerName = spawnerType.substring(0, 1).toUpperCase() + spawnerType.substring(1).toLowerCase();
+						
+						ItemStack spawnerItem = new ItemStack(Material.MOB_SPAWNER);
+						
+						ItemMeta spawnerIM = spawnerItem.getItemMeta();
+						
+						spawnerIM.setDisplayName(ChatColor.GREEN + spawnerName + " Spawner");
+						spawnerIM.setLore(Arrays.asList("This is a " + spawnerName + " Spawner!", "Place it where you want mobs to spawn"));
+						
+						spawnerItem.setItemMeta(spawnerIM);
+						
+						p.getInventory().addItem(spawnerItem);
+						
+						return;
+					}
 
 					if (mEconAPI.removeMoney(p, cost)) {
 
 						if (Utils.onlyContainsLetters(lines[1])) {
 
-							try {
+								ItemStack shopItem = new ItemStack(Material.getMaterial(lines[1].replace(" ", "_").toUpperCase()), amount);
 
-								if (lines[1].contains("_")) {
+								p.getInventory().addItem(shopItem);
+								
+								
+								p.updateInventory();
 
-									String[] args = lines[1].split("_");
-									StringBuilder builder = new StringBuilder();
+								p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8» &aYou sold &e" + amount + " "
+										+ lines[1].trim().replaceAll("_", " ") + "(s) &aand received &e$" + cost + "&a!"));
 
-									for (int i = 0; i < args.length; i++) {
+								return;
 
-										builder.append(args[i].substring(0, 1).toUpperCase()
-												+ args[i].substring(1).toLowerCase() + "_");
-
-									}
-
-									String materialName = builder.toString().replaceAll("_", " ").trim();
-
-									item = new ItemStack(
-											Material.getMaterial(lines[1].toUpperCase().trim().replaceAll(" ", "_")),
-											amount);
-									p.getInventory().addItem(item);
-
-									p.sendMessage(ChatColor.translateAlternateColorCodes('&',
-											"&8» &aYou bought &e" + amount + " " + materialName
-													+ "(s) &aand your account was debited &e$" + cost + "&a!"));
-
-									return;
-
-								} else {
-
-									String material = Material.getMaterial(lines[1].toUpperCase().trim()).toString();
-									String materialName = material.substring(0, 1).toUpperCase()
-											+ material.substring(1).toLowerCase();
-
-									item = new ItemStack(Material.getMaterial(lines[1].toUpperCase().trim()), amount);
-									p.getInventory().addItem(item);
-
-									p.sendMessage(ChatColor.translateAlternateColorCodes('&',
-											"&8» &aYou bought &e" + amount + " " + materialName
-													+ "(s) &aand your account was debited &e$" + cost + "&a!"));
-
-								}
-
-							} catch (Exception e2) {
-								p.sendMessage(ChatColor.translateAlternateColorCodes('&',
-										"&8» &cThis shop sign is not configured correctly! Please contact an administrator."));
-							}
-
-							return;
 						}
 
 						if (Utils.isInt(lines[1])) {

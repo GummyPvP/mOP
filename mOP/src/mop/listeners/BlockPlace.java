@@ -25,7 +25,14 @@ public class BlockPlace implements Listener {
 			if (e.getItemInHand().getItemMeta().hasDisplayName() == false) return;
 			if (e.getItemInHand().getItemMeta().hasLore() == false) return;
 			
-			String type = ChatColor.stripColor(e.getItemInHand().getItemMeta().getDisplayName().split("_")[0].toUpperCase());
+			String type = ChatColor.stripColor(e.getItemInHand().getItemMeta().getDisplayName().split(" ")[0].toUpperCase());
+			
+			if (e.getItemInHand().getItemMeta().getDisplayName().split(" ").length > 2) {
+				
+				type = ChatColor.stripColor(e.getItemInHand().getItemMeta().getDisplayName().split(" ")[0].toUpperCase() + "_" + e.getItemInHand().getItemMeta().getDisplayName().split(" ")[1].toUpperCase());
+				
+			}
+			
 			
 			EntityType entityType;
 			

@@ -56,4 +56,15 @@ public class Utils {
         }
         return notRemoved;
     }
+    
+	public static boolean inventoryIsEmpty(Inventory inv) {
+		
+		for (ItemStack contents : inv.getContents()) {
+			
+			if (contents != null) {
+				return false;
+			}
+		}
+		return true;
+	}
 }
