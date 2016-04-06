@@ -199,7 +199,7 @@ public class Manager {
 			p.getInventory().addItem(commonHook);
 			p.sendMessage(ChatColor.translateAlternateColorCodes('&',
 					"&8&l» &aCommon Crate Key &aadded to your inventory."));
-		}
+		} else
 		if (type == KeyType.UNCOMMON) {
 			ItemStack uncommonHook = new ItemStack(Material.TRIPWIRE_HOOK);
 			ItemMeta im = uncommonHook.getItemMeta();
@@ -208,7 +208,7 @@ public class Manager {
 			p.getInventory().addItem(uncommonHook);
 			p.sendMessage(ChatColor.translateAlternateColorCodes('&',
 					"&8&l» &6Uncommon Crate Key &aadded to your inventory."));
-		}
+		} else
 		if (type == KeyType.RARE) {
 			ItemStack rare = new ItemStack(Material.TRIPWIRE_HOOK);
 			ItemMeta im = rare.getItemMeta();
@@ -217,6 +217,9 @@ public class Manager {
 			p.getInventory().addItem(rare);
 			p.sendMessage(ChatColor.translateAlternateColorCodes('&',
 					"&8&l» &cRare Crate Key &aadded to your inventory."));
+		} else
+		if (type == KeyType.LEGENDARY) {
+			
 		}
 	}
 	public void giveVoucher(Player p, VoucherType voucher) {

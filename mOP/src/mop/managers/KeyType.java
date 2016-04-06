@@ -2,6 +2,6 @@ package mop.managers;
 
 public enum KeyType {
 	
-	COMMON, UNCOMMON, RARE;
+	COMMON, UNCOMMON, RARE, LEGENDARY;
 
 }
