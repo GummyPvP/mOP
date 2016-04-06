@@ -16,31 +16,39 @@ public class PlayerJoin implements Listener {
 
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
+		
 		Player p = e.getPlayer();
 
 		mEcon econ = new mEcon(p);
 		econ.setupPlayer();
-
+		
 		VaultManager.getInstance().setupPlayer(p);
+		
+		String[] message = new String[] { "&b&m-----------------------------------------------------",
+										  "                                                          ",
+										  "                   &a&lWelcome to &b&lGummyPvP &a" + p.getDisplayName() + "&a&l!",
+										  "                                                          ",
+										  "                                                          ",
+										  "                  &c&lFORUMS &fforums.gummypvp.com",
+										  "                  &a&lSHOP &fstore.gummypvp.com",
+                                          "                                                          ",
+                                          "                  &8[&a+&8] &7Want to see new changes? Try /changelog",
+										  "                                                          ",
+										  "&b&m-----------------------------------------------------"
+		
+		};
+		
 
 		for (int i = 0; i < 150; i++) {
-			p.sendMessage("        ");
+			p.sendMessage(" ");
 		}
-		p.sendMessage(ChatColor.translateAlternateColorCodes('&',
-				"&b&m-----------------------------------------------------"));
-		p.sendMessage("                                                          ");
-		p.sendMessage(ChatColor.translateAlternateColorCodes('&',
-				"                   &a&lWelcome to &b&lGummyPvP &a" + p.getDisplayName() + "&a&l!"));
-		p.sendMessage("                                                          ");
-		p.sendMessage("                                                          ");
-		p.sendMessage("                                                          ");
-		p.sendMessage(
-				ChatColor.translateAlternateColorCodes('&', "                  &c&lFORUMS &fforums.gummypvp.com"));
-		p.sendMessage(ChatColor.translateAlternateColorCodes('&', "                  &a&lSHOP &fstore.gummypvp.com"));
-		p.sendMessage("                                                          ");
-		p.sendMessage("                                                          ");
-		p.sendMessage(ChatColor.translateAlternateColorCodes('&',
-				"&b&m-----------------------------------------------------"));
+		
+		
+		for (String msg : message) {
+			
+			p.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
+			
+		}
 
 		IPFilter.getInstance().setupPlayer(p);
 

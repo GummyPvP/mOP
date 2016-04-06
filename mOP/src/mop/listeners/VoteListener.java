@@ -37,29 +37,22 @@ public class VoteListener implements Listener {
 						+ " &aand recieved a &c"
 						+ keytype.get(s).toString().toLowerCase()
 						+ " &acrate key!"));
-		if (keytype.get(s) == KeyType.COMMON) {
-			Manager.getInstance().giveKey(p, KeyType.COMMON);
-		}
-
-		if (keytype.get(s) == KeyType.UNCOMMON) {
-			Manager.getInstance().giveKey(p, KeyType.UNCOMMON);
-		}
-
-		if (keytype.get(s) == KeyType.RARE) {
-			Manager.getInstance().giveKey(p, KeyType.RARE);
-		}
-		keytype.put(s, KeyType.COMMON);
+		
+		Manager.getInstance().giveKey(p, keytype.get(s));
+		
 	}
 
 	public KeyType getKeyType(Player p) {
 		Random r = new Random();
-		if ((r.nextInt(500) <= 50))
-			return KeyType.UNCOMMON;
-		if ((r.nextInt(500) <= 100))
-			return KeyType.RARE;
-		if (r.nextInt(500) <= 300)
-			return KeyType.COMMON;
-
+		
+		int randomInt = r.nextInt(99) + 1;
+		
+		if (randomInt <= 1) return KeyType.LEGENDARY;
+		
+		if (randomInt <= 10) return KeyType.RARE;
+		
+		if (randomInt <= 35) return KeyType.UNCOMMON;
+		
 		return KeyType.COMMON;
 	}
 }

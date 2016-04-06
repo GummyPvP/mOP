@@ -1,21 +1,15 @@
 package mop.listeners;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.DyeColor;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Sign;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Ocelot;
-import org.bukkit.entity.Ocelot.Type;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Wolf;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -259,181 +253,267 @@ public class PlayerInteract implements Listener {
 			return;
 		if (e.getClickedBlock().getType() != Material.CHEST)
 			return;
+		
 		String location = e.getClickedBlock().getLocation().getWorld().getName() + ":"
 				+ e.getClickedBlock().getLocation().getBlockX() + ":" + e.getClickedBlock().getLocation().getBlockY()
 				+ ":" + e.getClickedBlock().getLocation().getBlockZ();
 		if (ConfigManager.getInstance().checkLocation(location) == false)
 			return;
+		
+		e.setCancelled(true);
+		
+		Random r = new Random();
 
 		// Common Key //
-		if (p.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GREEN + "Common Crate Key")) {
-			e.setCancelled(true);
-			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-					"&8&l» &b" + p.getName() + " is opening a &aCommon Crate&b..."));
+		
+		switch (ChatColor.stripColor(p.getItemInHand().getItemMeta().getDisplayName())) {
+		case "Common Crate Key":
+			
+			p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &bYou are opening a &aCommon Crate&b..."));
+			
 			p.playEffect(e.getClickedBlock().getLocation(), Effect.STEP_SOUND, 5);
 			p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1F, 1F);
-			if (p.getItemInHand().getAmount() == 1)
+			
+			if (p.getItemInHand().getAmount() == 1) {
+				
 				p.getInventory().removeItem(p.getItemInHand());
-			p.getItemInHand().setAmount(p.getItemInHand().getAmount() - 1);
+				
+			} else p.getItemInHand().setAmount(p.getItemInHand().getAmount() - 1);
+			
+			p.updateInventory();
+			
+		switch (r.nextInt(4)) {
+		case 0:
+			
+			mEconAPI.addMoney(p, 600000);
+			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
+					"&8&l» &b" + p.getName() + " won... $600,000 in cash from a &acommon crate!"));
+			
+			break;
+			
+		case 1:
+			
+			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &b" + p.getName() + " won... a Haribo Sword from a &acommon crate!"));
+			
+			ItemStack elite = new ItemStack(Material.DIAMOND_SWORD);
+			
+			ItemMeta im = elite.getItemMeta();
+			
+			im.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&9[&cHaribo Sword&9]"));
+			
+			im.addEnchant(Enchantment.DURABILITY, 7, true);
+			im.addEnchant(Enchantment.FIRE_ASPECT, 7, true);
+			im.addEnchant(Enchantment.DAMAGE_ALL, 20, true);
+			im.addEnchant(Enchantment.LOOT_BONUS_MOBS, 3, true);
+			
+			elite.setItemMeta(im);
+			
+			p.getInventory().addItem(elite);
+			
+			p.updateInventory();
+			
+			break;
+			
+		case 2:
+			
+			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "addcredits " + p.getName() + " 25");
+			
+			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &b" + p.getName() + " won... &c25 mcMMO credits &bfrom a &acommon crate!"));
+			
+			break;
 
-			Random r = new Random();
-			if (r.nextInt(3) == 0) {
-				mEconAPI.addMoney(p, 600000);
-				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-						"&8&l» &b" + p.getName() + " won... $600,000 in cash!"));
-				p.updateInventory();
-			} else if (r.nextInt(3) == 1) {
-				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-						"&8&l» &b" + p.getName() + " won... a Haribo Sword!!"));
-				ItemStack elite = new ItemStack(Material.DIAMOND_SWORD);
-				ItemMeta im = elite.getItemMeta();
-				im.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&9[&cHaribo Sword&9]"));
-				im.addEnchant(Enchantment.DURABILITY, 7, true);
-				im.addEnchant(Enchantment.FIRE_ASPECT, 7, true);
-				im.addEnchant(Enchantment.DAMAGE_ALL, 20, true);
-				im.addEnchant(Enchantment.LOOT_BONUS_MOBS, 3, true);
-				elite.setItemMeta(im);
-				p.getInventory().addItem(elite);
-				p.updateInventory();
-			} else if (r.nextInt(3) == 2) {
-				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-						"&8&l» &b" + p.getName() + " won... &atheir very own pet kitty!"));
-
-				Ocelot cat = (Ocelot) p.getWorld().spawnEntity(p.getLocation(), EntityType.OCELOT);
-				cat.setCustomNameVisible(true);
-				cat.setCustomName(ChatColor.BLUE + p.getName() + "'s " + ChatColor.AQUA + "pet kitty");
-				cat.setTamed(true);
-				cat.setOwner(p);
-				cat.setBaby();
-				cat.setAgeLock(true);
-				cat.setCatType(Type.BLACK_CAT);
-				cat.setMaxHealth(2000.0);
-				cat.setHealth(2000.0);
-
-				p.updateInventory();
+		default:
+			
+			
+			Manager.getInstance().giveKey(p, KeyType.UNCOMMON);
+			p.updateInventory();
+			
+			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &b" + p.getName() + " won... an &6Uncommon Crate Key &bfrom a &acommon crate!"));
+			
+			break;
+		}
+			
+			break;
+			
+		// Uncommon crate key
+			
+		case "Uncommon Crate Key":
+			
+			p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &bYou are opening a &6Uncommon Crate&b..."));
+			
+			p.playEffect(e.getClickedBlock().getLocation(), Effect.STEP_SOUND, 5);
+			p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1F, 1F);
+			
+			if (p.getItemInHand().getAmount() == 1) {
+				
+				p.getInventory().removeItem(p.getItemInHand());
+				
+			} else p.getItemInHand().setAmount(p.getItemInHand().getAmount() - 1);
+			
+			p.updateInventory();
+			
+		switch (r.nextInt(4)) {
+		case 0:
+			
+			if (r.nextInt(11) == 0) {
+				
+				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &b" + p.getName() + " won... &ca Rare Crate Key &bfrom an &6Uncommon Crate&a!"));
+				
+				Manager.getInstance().giveKey(p, KeyType.RARE);
+				
 			} else {
-				Bukkit.broadcastMessage(
-						ChatColor.translateAlternateColorCodes('&', "&8&l» &b" + p.getName() + " won... &cNothing :("));
+				
+				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &b" + p.getName() + " won... &aa Slime Kit Voucher &bfrom an &6Uncommon Crate&a!"));
+				Manager.getInstance().giveVoucher(p, VoucherType.SLIMEKIT);
+				
 				p.updateInventory();
+				
 			}
+			
+			break;
+			
+		case 1:
+			
+			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &b" + p.getName() + " won... &a$1,200,000 dollars &bfrom an &6Uncommon Crate&a!"));
+			mEconAPI.addMoney(p, 1200000);
+			
+			break;
+			
+		case 2:
+			
+			
+			
+			break;
+			
+		case 3:
+			
+			break;
+
+		default:
+			break;
+		}
+			
+			break;
+
+		default:
+			break;
+		}
+
 
 			// Uncommon Key
-		} else if (p.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GOLD + "Uncommon Crate Key")) {
-			e.setCancelled(true);
-			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-					"&8&l» &b" + p.getName() + " is opening a &6Uncommon Crate&b..."));
-			p.playEffect(e.getClickedBlock().getLocation(), Effect.STEP_SOUND, 5);
-			if (p.getItemInHand().getAmount() == 1)
-				p.getInventory().removeItem(p.getItemInHand());
-			p.getItemInHand().setAmount(p.getItemInHand().getAmount() - 1);
-
-			Random r = new Random();
-			if (r.nextInt(5) == 0) {
-				Random random = new Random();
-				if (r.nextInt(1) == 0) {
-					Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-							"&8&l» &b" + p.getName() + " won... &ca Rare Crate Key!"));
-					Manager.getInstance().giveKey(p, KeyType.RARE);
-				} else if (random.nextInt(2) == 1) {
-					Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-							"&8&l» &b" + p.getName() + " won... &aa Common Crate Key!"));
-					Manager.getInstance().giveKey(p, KeyType.COMMON);
-				}
-			} else if (r.nextInt(5) == 1) {
-				Bukkit.broadcastMessage(
-						ChatColor.translateAlternateColorCodes('&', "&8&l» &b" + p.getName() + " won... &aKit Gummy!"));
-				Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(),
-						"givekit " + p.getName() + " gummy");
-
-			} else if (r.nextInt(5) == 2) {
-				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-						"&8&l» &b" + p.getName() + " won... &atheir very own pet doggy!"));
-				Wolf wolf = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-				wolf.setCustomNameVisible(true);
-				wolf.setCustomName(ChatColor.BLUE + p.getName() + "'s " + ChatColor.AQUA + "pet doggy");
-				wolf.setTamed(true);
-				wolf.setOwner(p);
-				wolf.setCollarColor(DyeColor.MAGENTA);
-				wolf.setAdult();
-				wolf.setAgeLock(true);
-				wolf.setAngry(false);
-				wolf.setMaxHealth(2000.0);
-				wolf.setHealth(2000.0);
-			} else if (r.nextInt(5) == 3) {
-				mEconAPI.addMoney(p, 120000);
-				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-						"&8&l» &b" + p.getName() + " won... &a$1,200,000 in cash!"));
-			} else if (r.nextInt(5) == 4) {
-				ItemStack elite = new ItemStack(Material.DIAMOND_SWORD);
-				ItemMeta im = elite.getItemMeta();
-				im.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&lSloom Sword"));
-				im.addEnchant(Enchantment.DURABILITY, 15, true);
-				im.addEnchant(Enchantment.FIRE_ASPECT, 10, true);
-				im.addEnchant(Enchantment.DAMAGE_ALL, 30, true);
-				im.addEnchant(Enchantment.LOOT_BONUS_MOBS, 10, true);
-				ArrayList<String> l = new ArrayList<String>();
-				l.add(ChatColor.GRAY + "Devour I");
-				l.add(ChatColor.GRAY + "Bleed I");
-				im.setLore(l);
-				elite.setItemMeta(im);
-				p.getInventory().addItem(elite);
-				p.updateInventory();
-				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-						"&8&l» &b" + p.getName() + " won... &a Sloom Sword!"));
-			} else {
-				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-						"&8&l» &b" + p.getName() + " won... &6a money party for all players online!"));
-				for (Player online : Bukkit.getOnlinePlayers()) {
-					online.playSound(p.getLocation(), Sound.FIREWORK_LAUNCH, 1F, 1F);
-					online.playSound(p.getLocation(), Sound.FIREWORK_LARGE_BLAST2, 1F, 1F);
-					mEconAPI.addMoney(online, 500000);
-					online.sendMessage(ChatColor.translateAlternateColorCodes('&',
-							"&8&l» &aDeposited $500,000 dollars into your account!"));
-				}
-			}
-			p.updateInventory();
-			// Rare Key
-		} else if (p.getItemInHand().getItemMeta().getDisplayName()
-				.equalsIgnoreCase(ChatColor.RED + "Rare Crate Key")) {
-			e.setCancelled(true);
-			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-					"&8&l» &b" + p.getName() + " is opening a &cRare Crate&b..."));
-			p.playEffect(e.getClickedBlock().getLocation(), Effect.STEP_SOUND, 5);
-			p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1F, 1F);
-			if (p.getItemInHand().getAmount() == 1)
-				p.getInventory().removeItem(p.getItemInHand());
-			p.getItemInHand().setAmount(p.getItemInHand().getAmount() - 1);
-
-			Random r = new Random();
-
-			if (r.nextInt(3) == 0) {
-				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "addcredits " + p.getName() + " 100");
-				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-						"&8&l» &b" + p.getName() + " won... &c100 mcMMO credits!"));
-				p.sendMessage(ChatColor.translateAlternateColorCodes('&',
-						"&8&l» &aRedeem those tokens using the /redeem command,"));
-			} else if (r.nextInt(3) == 1) {
-				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-						"&8&l» &b" + p.getName() + " won... &6a money party for all players online!"));
-				for (Player online : Bukkit.getOnlinePlayers()) {
-					online.playSound(p.getLocation(), Sound.FIREWORK_LAUNCH, 1F, 1F);
-					online.playSound(p.getLocation(), Sound.FIREWORK_LARGE_BLAST2, 1F, 1F);
-					mEconAPI.addMoney(online, 1000000);
-					online.sendMessage(ChatColor.translateAlternateColorCodes('&',
-							"&8&l» &aDeposited $1,000,000 dollars into your account!"));
-				}
-			} else if (r.nextInt(3) == 2) {
-				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-						"&8&l» &b" + p.getName() + " won... &6a Random Voucher!"));
-				Manager.getInstance().giveVoucher(p, VoucherType.RANDOM);
-			} else {
-				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-						"&8&l» &b" + p.getName() + " won... &a Haribo Kit!"));
-				Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(),
-						"givekit " + p.getName() + " Haribo");
-			}
-			p.updateInventory();
-		}
+//		 if (p.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GOLD + "Uncommon Crate Key")) {
+//			e.setCancelled(true);
+//			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
+//					"&8&l» &b" + p.getName() + " is opening a &6Uncommon Crate&b..."));
+//			p.playEffect(e.getClickedBlock().getLocation(), Effect.STEP_SOUND, 5);
+//			if (p.getItemInHand().getAmount() == 1)
+//				p.getInventory().removeItem(p.getItemInHand());
+//			p.getItemInHand().setAmount(p.getItemInHand().getAmount() - 1);
+//
+//			if (r.nextInt(5) == 0) {
+//				Random random = new Random();
+//				if (r.nextInt(1) == 0) {
+//					Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
+//							"&8&l» &b" + p.getName() + " won... &ca Rare Crate Key!"));
+//					Manager.getInstance().giveKey(p, KeyType.RARE);
+//				} else if (random.nextInt(2) == 1) {
+//					Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
+//							"&8&l» &b" + p.getName() + " won... &aa Common Crate Key!"));
+//					Manager.getInstance().giveKey(p, KeyType.COMMON);
+//				}
+//			} else if (r.nextInt(5) == 1) {
+//				Bukkit.broadcastMessage(
+//						ChatColor.translateAlternateColorCodes('&', "&8&l» &b" + p.getName() + " won... &aKit Gummy!"));
+//				Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(),
+//						"givekit " + p.getName() + " gummy");
+//
+//			} else if (r.nextInt(5) == 2) {
+//				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
+//						"&8&l» &b" + p.getName() + " won... &atheir very own pet doggy!"));
+//				Wolf wolf = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
+//				wolf.setCustomNameVisible(true);
+//				wolf.setCustomName(ChatColor.BLUE + p.getName() + "'s " + ChatColor.AQUA + "pet doggy");
+//				wolf.setTamed(true);
+//				wolf.setOwner(p);
+//				wolf.setCollarColor(DyeColor.MAGENTA);
+//				wolf.setAdult();
+//				wolf.setAgeLock(true);
+//				wolf.setAngry(false);
+//				wolf.setMaxHealth(2000.0);
+//				wolf.setHealth(2000.0);
+//			} else if (r.nextInt(5) == 3) {
+//				mEconAPI.addMoney(p, 120000);
+//				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
+//						"&8&l» &b" + p.getName() + " won... &a$1,200,000 in cash!"));
+//			} else if (r.nextInt(5) == 4) {
+//				ItemStack elite = new ItemStack(Material.DIAMOND_SWORD);
+//				ItemMeta im = elite.getItemMeta();
+//				im.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&lSloom Sword"));
+//				im.addEnchant(Enchantment.DURABILITY, 15, true);
+//				im.addEnchant(Enchantment.FIRE_ASPECT, 10, true);
+//				im.addEnchant(Enchantment.DAMAGE_ALL, 30, true);
+//				im.addEnchant(Enchantment.LOOT_BONUS_MOBS, 10, true);
+//				ArrayList<String> l = new ArrayList<String>();
+//				l.add(ChatColor.GRAY + "Devour I");
+//				l.add(ChatColor.GRAY + "Bleed I");
+//				im.setLore(l);
+//				elite.setItemMeta(im);
+//				p.getInventory().addItem(elite);
+//				p.updateInventory();
+//				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
+//						"&8&l» &b" + p.getName() + " won... &a Sloom Sword!"));
+//			} else {
+//				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
+//						"&8&l» &b" + p.getName() + " won... &6a money party for all players online!"));
+//				for (Player online : Bukkit.getOnlinePlayers()) {
+//					online.playSound(p.getLocation(), Sound.FIREWORK_LAUNCH, 1F, 1F);
+//					online.playSound(p.getLocation(), Sound.FIREWORK_LARGE_BLAST2, 1F, 1F);
+//					mEconAPI.addMoney(online, 500000);
+//					online.sendMessage(ChatColor.translateAlternateColorCodes('&',
+//							"&8&l» &aDeposited $500,000 dollars into your account!"));
+//				}
+//			}
+//			p.updateInventory();
+//			// Rare Key
+//		} else if (p.getItemInHand().getItemMeta().getDisplayName()
+//				.equalsIgnoreCase(ChatColor.RED + "Rare Crate Key")) {
+//			e.setCancelled(true);
+//			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
+//					"&8&l» &b" + p.getName() + " is opening a &cRare Crate&b..."));
+//			p.playEffect(e.getClickedBlock().getLocation(), Effect.STEP_SOUND, 5);
+//			p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1F, 1F);
+//			if (p.getItemInHand().getAmount() == 1)
+//				p.getInventory().removeItem(p.getItemInHand());
+//			p.getItemInHand().setAmount(p.getItemInHand().getAmount() - 1);
+//
+//			if (r.nextInt(3) == 0) {
+//				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "addcredits " + p.getName() + " 100");
+//				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
+//						"&8&l» &b" + p.getName() + " won... &c100 mcMMO credits!"));
+//				p.sendMessage(ChatColor.translateAlternateColorCodes('&',
+//						"&8&l» &aRedeem those tokens using the /redeem command,"));
+//			} else if (r.nextInt(3) == 1) {
+//				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
+//						"&8&l» &b" + p.getName() + " won... &6a money party for all players online!"));
+//				for (Player online : Bukkit.getOnlinePlayers()) {
+//					online.playSound(p.getLocation(), Sound.FIREWORK_LAUNCH, 1F, 1F);
+//					online.playSound(p.getLocation(), Sound.FIREWORK_LARGE_BLAST2, 1F, 1F);
+//					mEconAPI.addMoney(online, 1000000);
+//					online.sendMessage(ChatColor.translateAlternateColorCodes('&',
+//							"&8&l» &aDeposited $1,000,000 dollars into your account!"));
+//				}
+//			} else if (r.nextInt(3) == 2) {
+//				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
+//						"&8&l» &b" + p.getName() + " won... &6a Random Voucher!"));
+//				Manager.getInstance().giveVoucher(p, VoucherType.RANDOM);
+//			} else {
+//				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
+//						"&8&l» &b" + p.getName() + " won... &a Haribo Kit!"));
+//				Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(),
+//						"givekit " + p.getName() + " Haribo");
+//			}
+//			p.updateInventory();
+//		}
 	}
 
 	@SuppressWarnings("deprecation")

@@ -29,6 +29,7 @@ import mop.cmds.Vote;
 import mop.economy.cmds.Econ;
 import mop.economy.utils.mEcon;
 import mop.listeners.BlockBreak;
+import mop.listeners.BlockPlace;
 import mop.listeners.CommandPreprocess;
 import mop.listeners.EntityDamage;
 import mop.listeners.EntityDamageByEntity;
@@ -88,6 +89,7 @@ public class Main extends JavaPlugin {
 		Bukkit.getServer().getPluginManager().registerEvents(new InventoryClick(), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new InventoryClose(), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new ProjectileLaunch(), this);
+		Bukkit.getServer().getPluginManager().registerEvents(new BlockPlace(), this);
 		
 		//getCommand("Stats").setExecutor(new Stats());
 		getCommand("Reload").setExecutor(new Reload());

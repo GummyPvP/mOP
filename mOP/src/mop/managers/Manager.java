@@ -165,6 +165,7 @@ public class Manager {
   }
     
     public static String Args(int nondik, String[] args) {
+    	
         StringBuilder sb = new StringBuilder();
         for (int i = nondik; i < args.length; i++){
         sb.append(args[i]).append(" ");
@@ -189,39 +190,63 @@ public class Manager {
         allArgs = allArgs.replace("[SUN]" , "\u2739");
         return allArgs;
         
-         }
+    }
 	public void giveKey(Player p, KeyType type) {
-		if (type == KeyType.COMMON) {
+		
+		switch (type) {
+		case COMMON:
+			
 			ItemStack commonHook = new ItemStack(Material.TRIPWIRE_HOOK);
 			ItemMeta im = commonHook.getItemMeta();
 			im.setDisplayName(ChatColor.GREEN + "Common Crate Key");
 			commonHook.setItemMeta(im);
 			p.getInventory().addItem(commonHook);
 			p.sendMessage(ChatColor.translateAlternateColorCodes('&',
-					"&8&l» &aCommon Crate Key &aadded to your inventory."));
-		} else
-		if (type == KeyType.UNCOMMON) {
+					"&8&l» &aCommon Crate Key &7added to your inventory."));
+			
+			break;
+			
+		case UNCOMMON:
+			
 			ItemStack uncommonHook = new ItemStack(Material.TRIPWIRE_HOOK);
-			ItemMeta im = uncommonHook.getItemMeta();
-			im.setDisplayName(ChatColor.GOLD + "Uncommon Crate Key");
-			uncommonHook.setItemMeta(im);
+			ItemMeta uncommonIM = uncommonHook.getItemMeta();
+			uncommonIM.setDisplayName(ChatColor.GOLD + "Uncommon Crate Key");
+			uncommonHook.setItemMeta(uncommonIM);
 			p.getInventory().addItem(uncommonHook);
 			p.sendMessage(ChatColor.translateAlternateColorCodes('&',
-					"&8&l» &6Uncommon Crate Key &aadded to your inventory."));
-		} else
-		if (type == KeyType.RARE) {
+					"&8&l» &6Uncommon Crate Key &7added to your inventory."));
+			
+			break;
+			
+		case RARE:
+			
 			ItemStack rare = new ItemStack(Material.TRIPWIRE_HOOK);
-			ItemMeta im = rare.getItemMeta();
-			im.setDisplayName(ChatColor.RED + "Rare Crate Key");
-			rare.setItemMeta(im);
+			ItemMeta rareIM = rare.getItemMeta();
+			rareIM.setDisplayName(ChatColor.RED + "Rare Crate Key");
+			rare.setItemMeta(rareIM);
 			p.getInventory().addItem(rare);
 			p.sendMessage(ChatColor.translateAlternateColorCodes('&',
-					"&8&l» &cRare Crate Key &aadded to your inventory."));
-		} else
-		if (type == KeyType.LEGENDARY) {
+					"&8&l» &cRare Crate Key &7added to your inventory."));
 			
+			break;
+			
+		case LEGENDARY:
+			
+			ItemStack legendary = new ItemStack(Material.TRIPWIRE_HOOK);
+			ItemMeta legendaryIM = legendary.getItemMeta();
+			legendaryIM.setDisplayName(ChatColor.DARK_PURPLE + "Legendary Crate Key");
+			legendary.setItemMeta(legendaryIM);
+			p.getInventory().addItem(legendary);
+			p.sendMessage(ChatColor.translateAlternateColorCodes('&',
+					"&8&l» &5Legendary Crate Key &7added to your inventory."));
+			
+			break;
+
+		default:
+			break;
 		}
 	}
+	
 	public void giveVoucher(Player p, VoucherType voucher) {
 		if (voucher == VoucherType.SLIMEKIT) {
 			ItemStack paper = new ItemStack(Material.PAPER, 1);
