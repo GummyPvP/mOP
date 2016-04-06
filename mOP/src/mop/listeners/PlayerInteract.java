@@ -464,11 +464,15 @@ public class PlayerInteract implements Listener {
 			
 			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &b" + p.getName() + " won... &aa Creeper Spawner Voucher &bfrom an &6Uncommon Crate&a!"));
 			
+			Manager.getInstance().giveVoucher(p, VoucherType.CREEPER_SPAWNER);
+			
 			break;
 
 		default:
 			
 			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &b" + p.getName() + " won... &aa Blaze Spawner Voucher &bfrom an &6Uncommon Crate&a!"));
+			
+			Manager.getInstance().giveVoucher(p, VoucherType.BLAZE_SPAWNER);
 			
 			break;
 		}
@@ -496,6 +500,8 @@ public class PlayerInteract implements Listener {
 			case 0:
 				
 				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &b" + p.getName() + " won... &a&la Slime Spawner Voucher &bfrom an &6Uncommon Crate&a!"));
+				
+				Manager.getInstance().giveVoucher(p, VoucherType.SLIME_SPAWNER);
 				
 				break;
 				
