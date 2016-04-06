@@ -23,7 +23,6 @@ public class SignChange implements Listener {
 		}
 		
 		if (!e.getPlayer().hasPermission("mop.sign.color")) {
-			ChatManager.getInstance().messageNoPermission(e.getPlayer());
 			return;
 		}
 		

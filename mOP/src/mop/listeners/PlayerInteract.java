@@ -721,6 +721,8 @@ public class PlayerInteract implements Listener {
 					
 					if (lines[1].contains(" Spawner")) {
 						
+						if (mEconAPI.removeMoney(p, cost) == true) {
+						
 						if (lines[1].contains("Iron")) {
 							
 							ItemStack spawnerItem = new ItemStack(Material.MOB_SPAWNER);
@@ -733,6 +735,7 @@ public class PlayerInteract implements Listener {
 							spawnerItem.setItemMeta(spawnerIM);
 							
 							p.getInventory().addItem(spawnerItem);
+							
 							
 							return;
 						}
@@ -771,6 +774,9 @@ public class PlayerInteract implements Listener {
 						
 						return;
 					}
+					} else
+						p.sendMessage(ChatColor.translateAlternateColorCodes('&',
+								"&8» &cYou do not have the required amount of funds to purchase this item!"));
 
 					if (mEconAPI.removeMoney(p, cost)) {
 
