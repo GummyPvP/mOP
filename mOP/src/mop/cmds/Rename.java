@@ -1,17 +1,19 @@
 package mop.cmds;
 
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import mop.managers.ChatManager;
-import mop.managers.Manager;
 
 public class Rename implements CommandExecutor {
 
-	@SuppressWarnings("static-access")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (!(sender instanceof Player)) {
@@ -25,7 +27,7 @@ public class Rename implements CommandExecutor {
 				return true;
 			}
 			
-			if (p.getItemInHand() == null) {
+			if ((p.getItemInHand() == null || p.getItemInHand().getType() == Material.AIR)) {
 				sender.sendMessage(ChatColor.RED + "You must be holding a item!");
 				return true;
 			}
@@ -35,8 +37,24 @@ public class Rename implements CommandExecutor {
 				return true;
 			}
 			
-			if (args.length == 1) {
-				Manager.getInstance().setName(p, (Manager.getInstance().Args(0, args)));
+			if (args.length >= 1) {
+				
+		        String name = StringUtils.join(args, ' ', 0, args.length);
+		        
+		        ItemStack hand = p.getItemInHand();
+		        
+		        ItemMeta im = hand.getItemMeta();
+		        
+		        im.setDisplayName(ChatColor.translateAlternateColorCodes('&', name));
+		        
+		        hand.setItemMeta(im);
+		        
+		        p.setItemInHand(hand);
+		        
+		        p.updateInventory();
+		        
+		        p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&aItem name has been updated!"));
+		        
 				return true;
 			}
 		}

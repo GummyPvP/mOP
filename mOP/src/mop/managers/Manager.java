@@ -156,41 +156,6 @@ public class Manager {
 		StatsManager.getInstance().saveConfig();
 		StatsManager.getInstance().reloadConfig();
 	}
-    public static void setName(Player player, String name){
-        ItemStack item = player.getItemInHand(); 
-        ItemMeta itemStackMeta = item.getItemMeta();
-        itemStackMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', name));           
-        item.setItemMeta(itemStackMeta);
-        player.updateInventory();
-  }
-    
-    public static String Args(int nondik, String[] args) {
-    	
-        StringBuilder sb = new StringBuilder();
-        for (int i = nondik; i < args.length; i++){
-        sb.append(args[i]).append(" ");
-        }String allArgs = sb.toString().trim();
-        //CHARACTERS
-        allArgs = allArgs.replace("[<3]" , "\u2764");
-        allArgs = allArgs.replace("[ARROW]" , "\u279c");
-        allArgs = allArgs.replace("[TICK]" , "\u2714");
-        allArgs = allArgs.replace("[X]" , "\u2716");
-        allArgs = allArgs.replace("[STAR]" , "\u2605");
-        allArgs = allArgs.replace("[POINT]" , "\u25Cf");
-        allArgs = allArgs.replace("[FLOWER]" , "\u273f");
-        //v2.1
-        allArgs = allArgs.replace("[XD]" , "\u263b");
-        allArgs = allArgs.replace("[DANGER]" , "\u26a0");
-        allArgs = allArgs.replace("[MAIL]" , "\u2709");
-        allArgs = allArgs.replace("[ARROW2]" , "\u27a4");
-        allArgs = allArgs.replace("[ROUND_STAR]" , "\u2730");
-        allArgs = allArgs.replace("[SUIT]" , "\u2666");
-        allArgs = allArgs.replace("[+]" , "\u2726");
-        allArgs = allArgs.replace("[CIRCLE]" , "\u25CF");
-        allArgs = allArgs.replace("[SUN]" , "\u2739");
-        return allArgs;
-        
-    }
 	public void giveKey(Player p, KeyType type) {
 		
 		switch (type) {

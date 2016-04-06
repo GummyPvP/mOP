@@ -308,8 +308,7 @@ public class PlayerInteract implements Listener {
 		if (e.getClickedBlock().getType() != Material.CHEST)
 			return;
 
-		if (p.getItemInHand().getType() == Material.TRIPWIRE_HOOK)
-			return;
+		if (p.getItemInHand().getType() == Material.TRIPWIRE_HOOK) return;
 		String location = e.getClickedBlock().getLocation().getWorld().getName() + ":"
 				+ e.getClickedBlock().getLocation().getBlockX() + ":" + e.getClickedBlock().getLocation().getBlockY()
 				+ ":" + e.getClickedBlock().getLocation().getBlockZ();

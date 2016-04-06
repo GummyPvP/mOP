@@ -14,13 +14,25 @@ public class InventoryClick implements Listener {
 	int uncommonkeyamount = 0;
 	int commonkeyamount = 0;
 	int rarekeyamount = 0;
+	int legendarykeyamount = 0;
 
 	public void playerCrateAmounts(Player p) {
 
 		uncommonkeyamount = 0;
 		commonkeyamount = 0;
 		rarekeyamount = 0;
+		legendarykeyamount = 0;
 
+		for (ItemStack inv : p.getInventory().getContents()) {
+			if (inv != null && inv.getType() != Material.AIR) {
+		         if (inv.getItemMeta().hasDisplayName() == true) {
+	               if (inv.getItemMeta().getDisplayName().equals(ChatColor.DARK_PURPLE + "Legendary Crate Key")) {
+	            	   legendarykeyamount = legendarykeyamount + inv.getAmount();
+		
+	         }
+	       }
+		}
+	}
 		for (ItemStack inv : p.getInventory().getContents()) {
 			if (inv != null && inv.getType() != Material.AIR) {
 				if (inv.getItemMeta().hasDisplayName() == true) {
@@ -73,6 +85,22 @@ public class InventoryClick implements Listener {
 			if (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GREEN + "Crates")) {
 				e.setCancelled(true);
 				return;
+			}
+			if (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_PURPLE + "Legendary Crate Key")) {
+
+				e.setCancelled(true);
+				p.closeInventory();
+				
+				if (legendarykeyamount == 0) {
+					
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&',
+							"&b&lGummyPvP&8> &cYour inventory does not contain any &5Legendary Crate Key(s)&c!"));
+				} else {
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&',
+							"&b&lGummyPvP&8> &bClick on the crate with your &5Legendary Crate Key(s)&b!"));
+				}
+				
+				
 			}
 			if (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GREEN + "Common Crate Key")) {
 				e.setCancelled(true);

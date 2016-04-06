@@ -17,14 +17,26 @@ public class CrateGUI {
 	ItemStack uncommonkey;
 	ItemStack commonkey;
 	ItemStack rarekey;
+	ItemStack legendarykey;
 	ItemStack glass;
 	
 	int uncommonkeyamount = 0;
 	int commonkeyamount = 0;
 	int rarekeyamount = 0;
+	int legendarykeyamount = 0;
 	
 	public void playerCrateAmounts() {
 		
+		for (ItemStack inv : p.getInventory().getContents()) {
+			if (inv != null && inv.getType() != Material.AIR) {
+		         if (inv.getItemMeta().hasDisplayName() == true) {
+	               if (inv.getItemMeta().getDisplayName().equals(ChatColor.DARK_PURPLE + "Legendary Crate Key")) {
+	            	   legendarykeyamount = legendarykeyamount + inv.getAmount();
+		
+	         }
+	       }
+		}
+	}
 		for (ItemStack inv : p.getInventory().getContents()) {
 			if (inv != null && inv.getType() != Material.AIR) {
 		         if (inv.getItemMeta().hasDisplayName() == true) {
@@ -73,6 +85,9 @@ public class CrateGUI {
 		rarekey = ItemManager.createItem(Material.TRIPWIRE_HOOK, 
 				ChatColor.RED + "Rare Crate Key", 
 			Arrays.asList(ChatColor.translateAlternateColorCodes('&', "&bYour inventory contains " + rarekeyamount + " Rare Crate Key(s)!")));
+		legendarykey = ItemManager.createItem(Material.TRIPWIRE_HOOK, 
+				ChatColor.DARK_PURPLE + "Legendary Crate Key", 
+			Arrays.asList(ChatColor.translateAlternateColorCodes('&', "&bYour inventory contains " + legendarykeyamount + " Rare Crate Key(s)!")));
 		
 		glass = ItemManager.createItem(Material.STAINED_GLASS_PANE, ChatColor.GREEN + "Crates");
 		glass.setDurability((short) 7);
@@ -88,13 +103,13 @@ public class CrateGUI {
 		
 	}
 	inv.setItem(9, glass);
-	inv.setItem(10, glass);
-	inv.setItem(11, commonkey);
-	inv.setItem(12, glass);
-	inv.setItem(13, uncommonkey);
-	inv.setItem(14, glass);
-	inv.setItem(15, rarekey);
-	inv.setItem(16, glass);
+	inv.setItem(10, commonkey);
+	inv.setItem(11, glass);
+	inv.setItem(12, uncommonkey);
+	inv.setItem(13, glass);
+	inv.setItem(14, rarekey);
+	inv.setItem(15, glass);
+	inv.setItem(16, legendarykey);
 	
 	}
 	public void openInventory(Player p) {
