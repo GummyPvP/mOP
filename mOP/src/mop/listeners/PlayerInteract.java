@@ -50,6 +50,87 @@ public class PlayerInteract implements Listener {
 
 			Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "gkit " + p.getName() + " slime");
 			return;
+		
+		} else if (p.getItemInHand().getItemMeta().getDisplayName()
+				.equals(ChatColor.translateAlternateColorCodes('&', "&9&lBlaze Spawner Voucher &7&o(Right click to redeem)"))) {
+			
+			if (p.getItemInHand().getAmount() == 1)
+				p.getInventory().removeItem(p.getItemInHand());
+			p.getItemInHand().setAmount(p.getItemInHand().getAmount() - 1);
+			
+			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
+					"&8&l» &b" + p.getName() + " has redeemed a &9&lBlaze Spawner &bVoucher!"));
+			
+			ItemStack spawnerItem = new ItemStack(Material.MOB_SPAWNER);
+			
+			ItemMeta spawnerIM = spawnerItem.getItemMeta();
+			
+			spawnerIM.setDisplayName(ChatColor.GREEN + "Blaze Spawner");
+			spawnerIM.setLore(Arrays.asList("This is a Blaze Spawner!", "Place it where you want mobs to spawn"));
+			
+			spawnerItem.setItemMeta(spawnerIM);
+			
+			p.getInventory().addItem(spawnerItem);
+			
+			
+			p.updateInventory();
+			
+			return;
+			
+			
+		} else if (p.getItemInHand().getItemMeta().getDisplayName()
+				.equals(ChatColor.translateAlternateColorCodes('&', "&e&lCreeper Spawner Voucher &7&o(Right click to redeem)"))) {
+			
+			if (p.getItemInHand().getAmount() == 1)
+				p.getInventory().removeItem(p.getItemInHand());
+			p.getItemInHand().setAmount(p.getItemInHand().getAmount() - 1);
+			
+			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
+					"&8&l» &b" + p.getName() + " has redeemed a &e&lCreeper Spawner &bVoucher!"));
+			
+			ItemStack spawnerItem = new ItemStack(Material.MOB_SPAWNER);
+			
+			ItemMeta spawnerIM = spawnerItem.getItemMeta();
+			
+			spawnerIM.setDisplayName(ChatColor.GREEN + "Creeper Spawner");
+			spawnerIM.setLore(Arrays.asList("This is a Creeper Spawner!", "Place it where you want mobs to spawn"));
+			
+			spawnerItem.setItemMeta(spawnerIM);
+			
+			p.getInventory().addItem(spawnerItem);
+			
+			p.updateInventory();
+			
+			return;
+			
+		} else if (p.getItemInHand().getItemMeta().getDisplayName()
+				.equals(ChatColor.translateAlternateColorCodes('&', "&a&lSlime Spawner Voucher &7&o(Right click to redeem)"))) {
+			
+			if (p.getItemInHand().getAmount() == 1)
+				p.getInventory().removeItem(p.getItemInHand());
+			p.getItemInHand().setAmount(p.getItemInHand().getAmount() - 1);
+			
+			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
+					"&8&l» &b" + p.getName() + " has redeemed a &a&lSlime Spawner &bVoucher!"));
+			
+			ItemStack spawnerItem = new ItemStack(Material.MOB_SPAWNER);
+			
+			ItemMeta spawnerIM = spawnerItem.getItemMeta();
+			
+			spawnerIM.setDisplayName(ChatColor.GREEN + "Slime Spawner");
+			spawnerIM.setLore(Arrays.asList("This is a Slime Spawner!", "Place it where you want mobs to spawn"));
+			
+			spawnerItem.setItemMeta(spawnerIM);
+			
+			p.getInventory().addItem(spawnerItem);
+			
+			
+			p.updateInventory();
+			
+			
+			
+			return;
+			
 		} else if (p.getItemInHand().getItemMeta().getDisplayName()
 				.equals(ChatColor.translateAlternateColorCodes('&', "&a&lKeys &7&o(Right click to redeem)"))) {
 
@@ -765,56 +846,6 @@ public class PlayerInteract implements Listener {
 							"&8» &cThis shop sign is not configured correctly! Please contact an administrator."));
 			}
 			break;
-		}
-	}
-
-	@EventHandler
-	public void onSpawnerSigns(PlayerInteractEvent e) {
-
-		if (!(e.getAction() == Action.RIGHT_CLICK_BLOCK))
-			return;
-
-		if (e.getClickedBlock() == null || e.getClickedBlock().getType() != Material.WALL_SIGN)
-			return;
-
-		if (!(e.getClickedBlock().getState() instanceof Sign))
-			return;
-
-		Sign sign = (Sign) e.getClickedBlock().getState();
-		Player p = e.getPlayer();
-
-		String[] lines = sign.getLines();
-
-		int cost = Integer.parseInt(lines[3].replaceAll("[$]", "").trim());
-
-		int amount = 1;
-
-		if (lines[0].equals(ChatColor.GREEN + "[Spawner]") == true) {
-
-			String[] data = lines[1].split(":");
-
-			ItemStack spawner = new ItemStack(Material.MOB_SPAWNER);
-
-			int type;
-			type = Integer.parseInt(data[1]);
-
-			ItemStack ma = new ItemStack(spawner);
-			ma.setDurability((short) type);
-
-			if (mEconAPI.removeMoney(p, cost) == true) {
-
-				p.getInventory().addItem(ma);
-
-				p.sendMessage(ChatColor.translateAlternateColorCodes('&',
-						"&8» " + "&aYou bought &e" + amount + " " + spawner.getData().toString().toUpperCase()
-								+ " &aand your account was debited &e$" + cost + "&a!"));
-
-				p.updateInventory();
-
-			} else
-				p.sendMessage(ChatColor.translateAlternateColorCodes('&',
-						"&8» &cYou do not have the required amount of funds to purchase this item!"));
-
 		}
 	}
 }

@@ -302,6 +302,33 @@ public class Manager {
 			p.getInventory().addItem(paper);
 			p.sendMessage(ChatColor.translateAlternateColorCodes('&',
 					"&8&l» &cA Sloom has been added to your inventory."));
+		} else if (voucher == VoucherType.SLIME_SPAWNER) {
+			ItemStack paper = new ItemStack(Material.PAPER, 1);
+			ItemMeta pmeta = paper.getItemMeta();
+			pmeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&lSlime Spawner Voucher &7&o(Right click to redeem)"));
+			paper.setItemMeta(pmeta);
+			p.updateInventory();
+			p.getInventory().addItem(paper);
+			p.sendMessage(ChatColor.translateAlternateColorCodes('&',
+					"&8&l» &cA Sloom has been added to your inventory."));
+		} else if (voucher == VoucherType.CREEPER_SPAWNER) {
+			ItemStack paper = new ItemStack(Material.PAPER, 1);
+			ItemMeta pmeta = paper.getItemMeta();
+			pmeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&e&lCreeper Spawner Voucher &7&o(Right click to redeem)"));
+			paper.setItemMeta(pmeta);
+			p.updateInventory();
+			p.getInventory().addItem(paper);
+			p.sendMessage(ChatColor.translateAlternateColorCodes('&',
+					"&8&l» &cA Sloom has been added to your inventory."));
+		} else if (voucher == VoucherType.BLAZE_SPAWNER) {
+			ItemStack paper = new ItemStack(Material.PAPER, 1);
+			ItemMeta pmeta = paper.getItemMeta();
+			pmeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&9&lBlaze Spawner Voucher &7&o(Right click to redeem)"));
+			paper.setItemMeta(pmeta);
+			p.updateInventory();
+			p.getInventory().addItem(paper);
+			p.sendMessage(ChatColor.translateAlternateColorCodes('&',
+					"&8&l» &cA Sloom has been added to your inventory."));
 		}
 	}
 	

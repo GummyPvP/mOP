@@ -23,7 +23,8 @@ public class GiveVoucher implements CommandExecutor {
 				return true;
 			}
 			if (args.length == 0) {
-				sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &bCurrent Vouchers:&a SlimeKit, HariboKit, GummyKit, SloomKit, Random, Keys"));
+				sender.sendMessage(ChatColor.translateAlternateColorCodes('&', 
+						"&8&l» &bCurrent Vouchers:&a SlimeKit, HariboKit, GummyKit, SloomKit, Random, Keys, CreeperSpawner, BlazeSpawner, SlimeSpawner"));
 				sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l» &c/givevoucher <player> <voucher>"));
 				return true;
 			}
@@ -43,6 +44,26 @@ public class GiveVoucher implements CommandExecutor {
 					Manager.getInstance().giveVoucher(target, VoucherType.HARIBOKIT);
 					sender.sendMessage(ChatColor.GREEN + "A Voucher has been added to "  + target.getName() + " inventory!");
 					return true;
+					
+				} else
+				if (args[1].equalsIgnoreCase("creeperspawner")) {
+					Manager.getInstance().giveVoucher(target, VoucherType.CREEPER_SPAWNER);
+					sender.sendMessage(ChatColor.GREEN + "A Voucher has been added to "  + target.getName() + " inventory!");
+					return true;
+					
+				} else
+				if (args[1].equalsIgnoreCase("blazespawner")) {
+					Manager.getInstance().giveVoucher(target, VoucherType.BLAZE_SPAWNER);
+					sender.sendMessage(ChatColor.GREEN + "A Voucher has been added to "  + target.getName() + " inventory!");
+					return true;
+					
+				} else
+				if (args[1].equalsIgnoreCase("slimespawner")) {
+					Manager.getInstance().giveVoucher(target, VoucherType.SLIME_SPAWNER);
+					sender.sendMessage(ChatColor.GREEN + "A Voucher has been added to "  + target.getName() + " inventory!");
+					return true;
+					
+					
 				} else
 				if (args[1].equalsIgnoreCase("gummykit")) {
 					Manager.getInstance().giveVoucher(target, VoucherType.GUMMYKIT);

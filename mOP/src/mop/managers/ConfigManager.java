@@ -32,6 +32,7 @@ public class ConfigManager {
 	File crates = new File("plugins/mOP/", "crates.yml");
 	FileConfiguration cratesfile = YamlConfiguration.loadConfiguration(crates);
 
+	
 	public void setup(Plugin p) {
 
 		try {
@@ -55,9 +56,18 @@ public class ConfigManager {
 		saveConfig();
 		this.p = p;
 
+		
+		
 		if (!p.getDataFolder().exists()) {
 			p.getDataFolder().mkdir();
 
+		}
+		
+		if (getConfig().contains("motd") == false) {
+			getConfig().set("motd", "      &b&m-&8»&e&m-&8»&b&m-&8»&e&m-&8» &8[&b✧&8] &b&lGummy PvP &8[&b✧&8] &8«&b&m-&8«&e&m-&8«&b&m-&8«&e&m-&r");
+			
+			saveConfig();
+			
 		}
 
 	}
