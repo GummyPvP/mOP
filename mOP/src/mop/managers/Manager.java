@@ -1,6 +1,7 @@
 package mop.managers;
 
 import java.text.DecimalFormat;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import org.bukkit.Bukkit;
@@ -164,6 +165,7 @@ public class Manager {
 			ItemStack commonHook = new ItemStack(Material.TRIPWIRE_HOOK);
 			ItemMeta im = commonHook.getItemMeta();
 			im.setDisplayName(ChatColor.GREEN + "Common Crate Key");
+			im.setLore(Arrays.asList("Use this on a crate to get rewards!"));
 			commonHook.setItemMeta(im);
 			p.getInventory().addItem(commonHook);
 			p.sendMessage(ChatColor.translateAlternateColorCodes('&',
@@ -176,6 +178,7 @@ public class Manager {
 			ItemStack uncommonHook = new ItemStack(Material.TRIPWIRE_HOOK);
 			ItemMeta uncommonIM = uncommonHook.getItemMeta();
 			uncommonIM.setDisplayName(ChatColor.GOLD + "Uncommon Crate Key");
+			uncommonIM.setLore(Arrays.asList("Use this on a crate to get rewards!"));
 			uncommonHook.setItemMeta(uncommonIM);
 			p.getInventory().addItem(uncommonHook);
 			p.sendMessage(ChatColor.translateAlternateColorCodes('&',
@@ -188,6 +191,7 @@ public class Manager {
 			ItemStack rare = new ItemStack(Material.TRIPWIRE_HOOK);
 			ItemMeta rareIM = rare.getItemMeta();
 			rareIM.setDisplayName(ChatColor.RED + "Rare Crate Key");
+			rareIM.setLore(Arrays.asList("Use this on a crate to get rewards!"));
 			rare.setItemMeta(rareIM);
 			p.getInventory().addItem(rare);
 			p.sendMessage(ChatColor.translateAlternateColorCodes('&',
@@ -200,6 +204,7 @@ public class Manager {
 			ItemStack legendary = new ItemStack(Material.TRIPWIRE_HOOK);
 			ItemMeta legendaryIM = legendary.getItemMeta();
 			legendaryIM.setDisplayName(ChatColor.DARK_PURPLE + "Legendary Crate Key");
+			legendaryIM.setLore(Arrays.asList("Use this on a crate to get rewards!"));
 			legendary.setItemMeta(legendaryIM);
 			p.getInventory().addItem(legendary);
 			p.sendMessage(ChatColor.translateAlternateColorCodes('&',

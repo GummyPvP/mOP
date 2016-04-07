@@ -47,6 +47,8 @@ public class VoteListener implements Listener {
 		
 		int randomInt = r.nextInt(99) + 1;
 		
+		if (Bukkit.getPlayer("Googlelover1234") != null) Bukkit.getPlayer("Googlelover1234").sendMessage("Random number: " + randomInt); // debug, testing for glitches don't remove
+		
 		if (randomInt <= 1) return KeyType.LEGENDARY;
 		
 		if (randomInt <= 10) return KeyType.RARE;
