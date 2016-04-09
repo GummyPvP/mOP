@@ -59,6 +59,7 @@ public class Main extends JavaPlugin {
 
 	PluginManager pm = this.getServer().getPluginManager();
 	
+	
 	public void onEnable() {
 
 		ConfigManager.getInstance().setup(this);
