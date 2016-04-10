@@ -13,6 +13,7 @@ import mop.cmds.Balance;
 import mop.cmds.CombatLog;
 import mop.cmds.Createcrate;
 import mop.cmds.Enchant;
+import mop.cmds.Fireball;
 import mop.cmds.GiveItem;
 import mop.cmds.GiveKey;
 import mop.cmds.GiveVoucher;
@@ -117,6 +118,7 @@ public class Main extends JavaPlugin {
 		getCommand("vault").setExecutor(new Vault());
 		getCommand("viewvault").setExecutor(new ViewVault());
 		getCommand("randomtp").setExecutor(new RandomTP());
+		getCommand("fireball").setExecutor(new Fireball());
 	}
 	
 	public void loadEconomy() {

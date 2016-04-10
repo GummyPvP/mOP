@@ -81,6 +81,10 @@ commands:
       description:
       usage: /<command>
       aliases: [rtp, rteleport, randomteleport]
+    fireball:
+      description:
+      usage: /<command>
+      aliases: [fireb, fb]
         
 permissions:
     mstats.reload:
