@@ -34,6 +34,7 @@ import mop.listeners.CommandPreprocess;
 import mop.listeners.EntityDamage;
 import mop.listeners.EntityDamageByEntity;
 import mop.listeners.InventoryClick;
+import mop.listeners.PlayerChatTabComplete;
 import mop.listeners.PlayerDeath;
 import mop.listeners.PlayerInteract;
 import mop.listeners.PlayerJoin;
@@ -91,6 +92,7 @@ public class Main extends JavaPlugin {
 		Bukkit.getServer().getPluginManager().registerEvents(new InventoryClose(), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new ProjectileLaunch(), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new BlockPlace(), this);
+		Bukkit.getServer().getPluginManager().registerEvents(new PlayerChatTabComplete(), this);
 		
 		//getCommand("Stats").setExecutor(new Stats());
 		getCommand("Reload").setExecutor(new Reload());
