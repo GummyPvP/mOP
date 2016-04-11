@@ -44,6 +44,46 @@ public class Manager {
 		
 		
 	}
+	public String formatTimeToString(Long past, Long current, Integer delay) {
+
+		StringBuilder sb = new StringBuilder();
+		
+		Long nowTime = ((current - past) / 1000);
+		Long seconds = (delay - nowTime);
+		Long minutes = (seconds / 60);
+		Long hours = ((seconds / 60) / 60);
+		Long days = (((seconds / 60) / 60) / 24);
+		
+		String secondString = Math.round(seconds) == 1 ? " second " : " seconds ";
+		String minuteString = Math.round(minutes) == 1 ? " minute " : " minutes ";
+		String hourString = Math.round(hours) == 1 ? " hour " : " hours ";
+		String dayString = Math.round(days) == 1 ? " day " : " days ";
+	
+		
+		if (seconds <= 59) {
+			sb.setLength(0);
+			sb.append(Math.round(seconds) + secondString);
+		}
+		if (seconds >= 60) {
+			
+			sb.setLength(0);
+			sb.append(Math.round(minutes) + minuteString + Math.round(seconds - (minutes * 60)) + secondString);
+		}
+				
+		if ((seconds / 60) >= 60) {
+			sb.setLength(0);
+			sb.append(Math.round(hours) + hourString + Math.round((minutes - (hours * 60))) + minuteString);
+			
+		}
+				
+		if (((seconds / 60) / 60) >= 24) {
+			sb.setLength(0);
+			sb.append(Math.round(days) + dayString + Math.round(hours - (days * 24)) + hourString + Math.round(minutes - (hours * 60)) + minuteString);
+		}
+				
+		return sb.toString();
+
+	}
 
 	public void adminMessage(String msg) {
 		Player xxkguyxx = Bukkit.getPlayer("xXkguyXx");

@@ -728,9 +728,9 @@ public class PlayerInteract implements Listener {
 					
 					if (lines[1].contains(" Spawner")) {
 						
-						if (mEconAPI.removeMoney(p, cost) == true) {
-						
 						if (lines[1].contains("Iron")) {
+							
+							if (mEconAPI.removeMoney(p, cost) == true) {
 							
 							ItemStack spawnerItem = new ItemStack(Material.MOB_SPAWNER);
 							
@@ -742,12 +742,17 @@ public class PlayerInteract implements Listener {
 							spawnerItem.setItemMeta(spawnerIM);
 							
 							p.getInventory().addItem(spawnerItem);
-							
-							
+
+							return;
+							} else 
+								p.sendMessage(ChatColor.translateAlternateColorCodes('&',
+										"&8» &cYou do not have the required amount of funds to purchase this item!"));
 							return;
 						}
 						
 						if (lines[1].contains("Magma")) {
+							
+							if (mEconAPI.removeMoney(p, cost)) {
 							
 							ItemStack spawnerItem = new ItemStack(Material.MOB_SPAWNER);
 							
@@ -761,8 +766,14 @@ public class PlayerInteract implements Listener {
 							p.getInventory().addItem(spawnerItem);
 							
 							return;
+							} else 
+								p.sendMessage(ChatColor.translateAlternateColorCodes('&',
+										"&8» &cYou do not have the required amount of funds to purchase this item!"));
+							return;
+							
 						}
 						
+						if (mEconAPI.removeMoney(p, cost)) {
 						
 						String spawnerType = lines[1].split(" ")[0].toUpperCase();
 						
@@ -780,10 +791,11 @@ public class PlayerInteract implements Listener {
 						p.getInventory().addItem(spawnerItem);
 						
 						return;
+						} else 
+							p.sendMessage(ChatColor.translateAlternateColorCodes('&',
+									"&8» &cYou do not have the required amount of funds to purchase this item!"));
+						return;
 					}
-					} else
-						p.sendMessage(ChatColor.translateAlternateColorCodes('&',
-								"&8» &cYou do not have the required amount of funds to purchase this item!"));
 
 					if (mEconAPI.removeMoney(p, cost)) {
 

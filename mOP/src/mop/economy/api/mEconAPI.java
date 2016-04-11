@@ -26,6 +26,7 @@ public class mEconAPI {
 
 	public static boolean removeMoney(Player p, int amount) {
 		mEcon econ = new mEcon(p);
+		
 		if (econ.removeMoney(amount)) {
 
 			return true;

@@ -85,6 +85,9 @@ commands:
       description:
       usage: /<command>
       aliases: [fireb, fb]
+    pot:
+      description:
+      usage: /<command>
         
 permissions:
     mstats.reload:

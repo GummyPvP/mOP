@@ -21,6 +21,7 @@ import mop.cmds.Ip;
 import mop.cmds.JellyLegs;
 import mop.cmds.MaintenanceMode;
 import mop.cmds.Pay;
+import mop.cmds.Pot;
 import mop.cmds.RandomTP;
 import mop.cmds.Reload;
 import mop.cmds.RemoveCrate;
@@ -119,6 +120,7 @@ public class Main extends JavaPlugin {
 		getCommand("viewvault").setExecutor(new ViewVault());
 		getCommand("randomtp").setExecutor(new RandomTP());
 		getCommand("fireball").setExecutor(new Fireball());
+		getCommand("pot").setExecutor(new Pot());
 	}
 	
 	public void loadEconomy() {
