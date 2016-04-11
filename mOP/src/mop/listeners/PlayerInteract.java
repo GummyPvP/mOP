@@ -77,7 +77,6 @@ public class PlayerInteract implements Listener {
 			
 			return;
 			
-			
 		} else if (p.getItemInHand().getItemMeta().getDisplayName()
 				.equals(ChatColor.translateAlternateColorCodes('&', "&e&lCreeper Spawner Voucher &7&o(Right click to redeem)"))) {
 			

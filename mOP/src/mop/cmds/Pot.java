@@ -38,7 +38,6 @@ public class Pot implements CommandExecutor {
 			}
 			
 			
-			
 			p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 18000, 1));
 			p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 18000, 1));
 			p.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 4000, 3));
